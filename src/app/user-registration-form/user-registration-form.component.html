@@ -1,0 +1,81 @@
+<!-- src/app/user-registration-form/user-registration-form.component.html -->
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Sign Up!</mat-card-title>
+    <mat-card-subtitle
+      >Sign up to keep track of all of your favorite movies!</mat-card-subtitle
+    >
+  </mat-card-header>
+  <!-- <img mat-card-image src="{{Movie.ImagePath}}"> -->
+  <mat-card-content>
+    <form>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Username"
+          [(ngModel)]="userData.Username"
+          type="text"
+          name="Username"
+          #Username="ngModel"
+          required
+        />
+        <mat-error *ngIf="Username.invalid">Username is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          [(ngModel)]="userData.Password"
+          type="password"
+          name="Password"
+          #Password="ngModel"
+          required
+        />
+        <mat-error *ngIf="Password.invalid">Password is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Email"
+          [(ngModel)]="userData.Email"
+          type="email"
+          name="Email"
+          #Email="ngModel"
+          required
+        />
+        <mat-error *ngIf="Email.invalid">Email is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="First Name"
+          [(ngModel)]="userData.FirstName"
+          type="text"
+          name="FirstName"
+          #FirstName="ngModel"
+          required
+        />
+        <mat-error *ngIf="FirstName.invalid">First name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Last Name"
+          [(ngModel)]="userData.LastName"
+          type="text"
+          name="LastName"
+          #LastName="ngModel"
+          required
+        />
+        <mat-error *ngIf="LastName.invalid">Last name is required</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="registerUser()" color="primary">
+      Sign Up
+    </button>
+  </mat-card-actions>
+  <mat-card-footer></mat-card-footer>
+</mat-card>
