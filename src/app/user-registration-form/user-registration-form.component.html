@@ -1,15 +1,12 @@
 <!-- src/app/user-registration-form/user-registration-form.component.html -->
-
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Sign Up!</mat-card-title>
-    <mat-card-subtitle
-      >Sign up to keep track of all of your favorite movies!</mat-card-subtitle
-    >
-  </mat-card-header>
-  <!-- <img mat-card-image src="{{Movie.ImagePath}}"> -->
-  <mat-card-content>
-    <form>
+<div class="registration-container">
+  <h1 mat-dialog-title>Sign Up!</h1>
+  <div mat-dialog-content>
+    <p class="subtitle">
+      Sign up to keep track of all of your favorite movies!
+    </p>
+    <!-- <img mat-card-image src="{{Movie.ImagePath}}"> -->
+    <form class="registration-form">
       <mat-form-field>
         <input
           matInput
@@ -49,6 +46,18 @@
       <mat-form-field>
         <input
           matInput
+          placeholder="Birthday"
+          [(ngModel)]="userData.Birthday"
+          type="date"
+          name="Birthday"
+          #Birthday="ngModel"
+          required
+        />
+        <mat-error *ngIf="Birthday.invalid">Birthday is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
           placeholder="First Name"
           [(ngModel)]="userData.FirstName"
           type="text"
@@ -71,11 +80,11 @@
         <mat-error *ngIf="LastName.invalid">Last name is required</mat-error>
       </mat-form-field>
     </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="registerUser()" color="primary">
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="registerUser()">
       Sign Up
     </button>
-  </mat-card-actions>
-  <mat-card-footer></mat-card-footer>
-</mat-card>
+  </div>
+</div>

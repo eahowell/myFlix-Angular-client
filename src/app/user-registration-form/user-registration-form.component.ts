@@ -3,45 +3,81 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-registration-form',
   templateUrl: './user-registration-form.component.html',
-  styleUrl: './user-registration-form.component.scss'
+  styleUrl: './user-registration-form.component.scss',
 })
 export class UserRegistrationFormComponent implements OnInit {
   @Input() userData = {
-    Username:'',
+    Username: '',
     Password: '',
     Email: '',
     Birthday: '',
     FirstName: '',
-    LastName: ''
+    LastName: '',
   };
 
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
-    public snackBar: MatSnackBar) {}
+    public snackBar: MatSnackBar
+  ) {}
 
-    ngOnInit(): void {
+  ngOnInit(): void {}
 
-    }
+  registerUser(): void {
+    // Create a copy of userData with lowercase username
+    const userDataToSend = {
+      ...this.userData,
+      Username: this.userData.Username.toLowerCase(),
+    };
 
-    registerUser(): void {
-      this.fetchApiData.userRegistration(this.userData).subscribe((repsonse) => {
-        // Successful user registration
-        this.dialogRef.close(); // Close on success
-        console.log(repsonse);
-        this.snackBar.open('User successfully registered!', 'OK',{
-          duration: 2000
+    this.fetchApiData.userRegistration(userDataToSend).subscribe({
+      next: (response) => {
+        this.dialogRef.close();
+        console.log(response);
+        this.snackBar.open('User successfully registered!', 'OK', {
+          duration: 6000,
         });
-      }, (repsonse)=>{
-        console.log(repsonse);
-        this.snackBar.open(repsonse, 'OK', {
-          duration: 2000
-        });
-      });
-    }
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('Error status:', error.status);
+        console.log('Error body:', error.error);
 
+        let errorMessage = 'Something went wrong! Please try again later.';
+
+        switch (error.status) {
+          case 400:
+            errorMessage = 'Please check your input - all fields are required.';
+            break;
+          case 409:
+            errorMessage =
+              'This username is already taken. Please choose another.';
+            break;
+          case 422:
+            errorMessage = 'Invalid input format. Please check your details.';
+            break;
+          case 500:
+            errorMessage = 'Server error. Please try again later.';
+            break;
+        }
+
+        if (error.error && typeof error.error === 'string') {
+          errorMessage = error.error;
+        } else if (error.error?.message) {
+          errorMessage = error.error.message;
+        }
+
+        console.log('Final error message:', errorMessage);
+
+        this.snackBar.open(errorMessage, 'OK', {
+          duration: 5000,
+          panelClass: ['error-snackbar'],
+        });
+      },
+    });
+  }
 }

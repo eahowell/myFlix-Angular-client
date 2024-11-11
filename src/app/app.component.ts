@@ -12,9 +12,13 @@ export class AppComponent {
   title = 'myFlix';
 
   constructor(public dialog: MatDialog) {}
+
   openUserRegistrationDialog(): void {
-    this.dialog.open(UserRegistrationFormComponent, {
-      width: '280px'
+    const dialogRef = this.dialog.open(UserRegistrationFormComponent, {
+      maxWidth: '450px',
+      width: '95%',
+      maxHeight: '100vh',
+      autoFocus: false
     });
   }
 }

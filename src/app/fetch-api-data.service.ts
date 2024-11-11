@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class FetchApiDataService {
-  private apiUrl = 'https://myflix-eahowell-7d843bf0554c.herokuapp.com/';
+  private apiUrl = 'https://myflix-eahowell-7d843bf0554c.herokuapp.com';
   constructor(private http: HttpClient) {}
 
   // Private method to get headers
@@ -24,16 +24,10 @@ export class FetchApiDataService {
     const body = res;
     return body || {};
   }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError(() => 'Something bad happened; please try again later.');
-  }
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('An error occurred:', error);
+    return throwError(() => error);
+}
 
   // CREATE - POST - Allow new users to register;  (username, password, first name, last name, email, date of birth)
   public userRegistration(userDetails: any): Observable<any> {
