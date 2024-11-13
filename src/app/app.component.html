@@ -2,7 +2,12 @@
 
 <main class="main">
   <div class="app-container">
+     <!-- <button mat-icon-button (click)="toggleTheme()" *ngIf="isPlatformBrowser(platformId)">
+        <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button> -->
+
     <div class="content-wrapper">
+      <!-- <button mat-raised-button (click)="toggleTheme()">Toggle Theme</button> -->
       <h1>Welcome to myFlix!</h1>
       <div class="button-group">
         <button
@@ -13,6 +18,7 @@
         </button>
         <button
           mat-raised-button
+          (click)="openLoginDialog()"
           color="primary">
           Login
         </button>
