@@ -1,291 +1,132 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
 /* Base Theme Configuration */
-:root {
-  /* Core brand colors */
-  --brand-primary: #F84040;
-  --brand-custom: #3F7EC7;
-}
+$brand-primary: #F84040;
+$brand-custom: #3F7EC7;
 
 /* Light Theme (Default) */
-.theme-light {
-  /* Primary colors */
-  --color-primary: #904A45;
-  --color-primary-container: #FFDAD6;
-  --on-primary: #FFFFFF;
-  --on-primary-container: #3B0908;
+$color-primary: #904A45;
+$color-primary-container: #FFDAD6;
+$on-primary: #FFFFFF;
+$on-primary-container: #3B0908;
 
-  /* Secondary colors */
-  --color-secondary: #775653;
-  --color-secondary-container: #FFDAD6;
-  --on-secondary: #FFFFFF;
-  --on-secondary-container: #2C1513;
+$color-secondary: #775653;
+$color-secondary-container: #FFDAD6;
+$on-secondary: #FFFFFF;
+$on-secondary-container: #2C1513;
 
-  /* Tertiary colors */
-  --color-tertiary: #725B2E;
-  --color-tertiary-container: #FFDEA6;
-  --on-tertiary: #FFFFFF;
-  --on-tertiary-container: #261900;
+$color-tertiary: #725B2E;
+$color-tertiary-container: #FFDEA6;
+$on-tertiary: #FFFFFF;
+$on-tertiary-container: #261900;
 
-  /* Error colors */
-  --color-error: #BA1A1A;
-  --color-error-container: #FFDAD6;
-  --on-error: #FFFFFF;
-  --on-error-container: #410002;
+$color-error: #BA1A1A;
+$color-error-container: #FFDAD6;
+$on-error: #FFFFFF;
+$on-error-container: #410002;
 
-  /* Surface colors */
-  --color-surface: #FFF8F7;
-  --color-surface-dim: #E8D6D4;
-  --color-surface-bright: #FFF8F7;
-  --color-surface-container: #FCEAE8;
-  --color-surface-container-low: #FFF0EF;
-  --color-surface-container-high: #F6E4E2;
-  --color-surface-container-highest: #F1DEDC;
-  --color-surface-variant: #F5DDDB;
+$color-surface: #FFF8F7;
+$color-surface-dim: #E8D6D4;
+$color-surface-bright: #FFF8F7;
+$color-surface-container: #FCEAE8;
+$color-surface-container-low: #FFF0EF;
+$color-surface-container-high: #F6E4E2;
+$color-surface-container-highest: #F1DEDC;
+$color-surface-variant: #F5DDDB;
 
-  /* Background */
-  --color-background: #FFF8F7;
+$color-background: #FFF8F7;
 
-  /* On colors */
-  --on-background: #231918;
-  --on-surface: #231918;
-  --on-surface-variant: #534342;
+$on-background: #231918;
+$on-surface: #231918;
+$on-surface-variant: #534342;
 
-  /* Other colors */
-  --color-outline: #857371;
-  --color-outline-variant: #D8C2BF;
-  --color-shadow: #000000;
-  --color-scrim: #000000;
-  --surface-tint: #904A45;
+$color-outline: #857371;
+$color-outline-variant: #D8C2BF;
+$color-shadow: #000000;
+$color-scrim: #000000;
+$surface-tint: #904A45;
 
-  /* Inverse colors */
-  --inverse-surface: #392E2D;
-  --inverse-on-surface: #FFEDEB;
-  --inverse-primary: #FFB3AD;
-}
+$inverse-surface: #392E2D;
+$inverse-on-surface: #FFEDEB;
+$inverse-primary: #FFB3AD;
 
 /* Dark Theme */
-.theme-dark {
-  /* Primary colors */
-  --color-primary: #FFB3AD;
-  --color-primary-container: #73332F;
-  --on-primary: #571E1B;
-  --on-primary-container: #FFDAD6;
+$dark-color-primary: #FFB3AD;
+$dark-color-primary-container: #75302D;
+$dark-on-primary: #5E1411;
+$dark-on-primary-container: #FFDAD6;
 
-  /* Secondary colors */
-  --color-secondary: #E7BDB9;
-  --color-secondary-container: #5D3F3D;
-  --on-secondary: #442927;
-  --on-secondary-container: #FFDAD6;
+$dark-color-secondary: #E7BDB8;
+$dark-color-secondary-container: #5D3F3C;
+$dark-on-secondary: #442926;
+$dark-on-secondary-container: #FFDAD6;
 
-  /* Tertiary colors */
-  --color-tertiary: #E1C28C;
-  --color-tertiary-container: #584319;
-  --on-tertiary: #402D04;
-  --on-tertiary-container: #FFDEA6;
+$dark-color-tertiary: #E1C28C;
+$dark-color-tertiary-container: #58442F;
+$dark-on-tertiary: #3E2D19;
+$dark-on-tertiary-container: #FFDEA6;
 
-  /* Error colors */
-  --color-error: #FFB4AB;
-  --color-error-container: #93000A;
-  --on-error: #690005;
-  --on-error-container: #FFDAD6;
+$dark-color-error: #FFB4AB;
+$dark-color-error-container: #93000A;
+$dark-on-error: #690005;
+$dark-on-error-container: #FFDAD6;
 
-  /* Surface colors */
-  --color-surface: #1A1110;
-  --color-surface-dim: #1A1110;
-  --color-surface-bright: #423735;
-  --color-surface-container: #271D1C;
-  --color-surface-container-low: #231918;
-  --color-surface-container-high: #322827;
-  --color-surface-container-highest: #3D3231;
-  --color-surface-variant: #534342;
+$dark-color-surface: #231918;
+$dark-color-surface-dim: #231918;
+$dark-color-surface-bright: #3F2E2D;
+$dark-color-surface-container: #302524;
+$dark-color-surface-container-low: #2A1F1E;
+$dark-color-surface-container-high: #392E2D;
+$dark-color-surface-container-highest: #423736;
+$dark-color-surface-variant: #534342;
 
-  /* Background */
-  --color-background: #1A1110;
+$dark-color-background: #231918;
 
-  /* On colors */
-  --on-background: #F1DEDC;
-  --on-surface: #F1DEDC;
-  --on-surface-variant: #D8C2BF;
+$dark-on-background: #ECDFDD;
+$dark-on-surface: #ECDFDD;
+$dark-on-surface-variant: #D8C2BF;
 
-  /* Other colors */
-  --color-outline: #A08C8A;
-  --color-outline-variant: #534342;
-  --color-shadow: #000000;
-  --color-scrim: #000000;
-  --surface-tint: #FFB3AD;
+$dark-color-outline: #A08C8A;
+$dark-color-outline-variant: #534342;
+$dark-color-shadow: #000000;
+$dark-color-scrim: #000000;
+$dark-surface-tint: #FFB3AD;
 
-  /* Inverse colors */
-  --inverse-surface: #F1DEDC;
-  --inverse-on-surface: #392E2D;
-  --inverse-primary: #904A45;
-}
+$dark-inverse-surface: #ECDFDD;
+$dark-inverse-on-surface: #231918;
+$dark-inverse-primary: #904A45;
 
-/* High Contrast Light Theme */
-.theme-light-high-contrast {
-  /* Primary colors */
-  --color-primary: #440F0E;
-  --color-primary-container: #6E2F2C;
-  --on-primary: #FFFFFF;
-  --on-primary-container: #FFFFFF;
-
-  /* Secondary colors */
-  --color-secondary: #341B1A;
-  --color-secondary-container: #593B39;
-  --on-secondary: #FFFFFF;
-  --on-secondary-container: #FFFFFF;
-
-  /* Tertiary colors */
-  --color-tertiary: #2F2000;
-  --color-tertiary-container: #544015;
-  --on-tertiary: #FFFFFF;
-  --on-tertiary-container: #FFFFFF;
-
-  /* Error colors */
-  --color-error: #4E0002;
-  --color-error-container: #8C0009;
-  --on-error: #FFFFFF;
-  --on-error-container: #FFFFFF;
-
-  /* Surface colors */
-  --color-surface: #FFF8F7;
-  --color-surface-variant: #F5DDDB;
-
-  /* Background */
-  --color-background: #FFF8F7;
-
-  /* On colors */
-  --on-background: #231918;
-  --on-surface: #000000;
-  --on-surface-variant: #2E2120;
-
-  /* Other colors */
-  --color-outline: #4E3F3E;
-  --color-outline-variant: #4E3F3E;
-  --surface-tint: #904A45;
-
-  /* Inverse colors */
-  --inverse-surface: #392E2D;
-  --inverse-on-surface: #FFFFFF;
-  --inverse-primary: #FFE7E4;
-}
-
-/* High Contrast Dark Theme */
-.theme-dark-high-contrast {
-  /* Primary colors */
-  --color-primary: #FFF9F9;
-  --color-primary-container: #FFB9B3;
-  --on-primary: #000000;
-  --on-primary-container: #000000;
-
-  /* Secondary colors */
-  --color-secondary: #FFF9F9;
-  --color-secondary-container: #EBC1BD;
-  --on-secondary: #000000;
-  --on-secondary-container: #000000;
-
-  /* Tertiary colors */
-  --color-tertiary: #FFFAF7;
-  --color-tertiary-container: #E6C790;
-  --on-tertiary: #000000;
-  --on-tertiary-container: #000000;
-
-  /* Error colors */
-  --color-error: #FFF9F9;
-  --color-error-container: #FFBAB1;
-  --on-error: #000000;
-  --on-error-container: #000000;
-
-  /* Surface colors */
-  --color-surface: #1A1110;
-  --color-surface-variant: #534342;
-
-  /* Background */
-  --color-background: #1A1110;
-
-  /* On colors */
-  --on-background: #F1DEDC;
-  --on-surface: #FFFFFF;
-  --on-surface-variant: #FFF9F9;
-
-  /* Other colors */
-  --color-outline: #DCC6C3;
-  --color-outline-variant: #DCC6C3;
-  --surface-tint: #FFB3AD;
-}
-
-/* Create a list of all custom properties to be used in the auto theme */
-$theme-properties: (
-  --color-primary,
-  --color-primary-container,
-  --on-primary,
-  --on-primary-container,
-  --color-secondary,
-  --color-secondary-container,
-  --on-secondary,
-  --on-secondary-container,
-  --color-tertiary,
-  --color-tertiary-container,
-  --on-tertiary,
-  --on-tertiary-container,
-  --color-error,
-  --color-error-container,
-  --on-error,
-  --on-error-container,
-  --color-surface,
-  --color-surface-dim,
-  --color-surface-bright,
-  --color-surface-container,
-  --color-surface-container-low,
-  --color-surface-container-high,
-  --color-surface-container-highest,
-  --color-surface-variant,
-  --color-background,
-  --on-background,
-  --on-surface,
-  --on-surface-variant,
-  --color-outline,
-  --color-outline-variant,
-  --color-shadow,
-  --color-scrim,
-  --surface-tint,
-  --inverse-surface,
-  --inverse-on-surface,
-  --inverse-primary
-);
-
-/* Auto theme that responds to system preferences */
-.theme-auto {
-  @media (prefers-color-scheme: light) {
-    & {
-      color-scheme: light;
-      @each $property in $theme-properties {
-        #{$property}: var(#{$property}, initial);
-      }
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    & {
-      color-scheme: dark;
-      @each $property in $theme-properties {
-        #{$property}: var(#{$property}, initial);
-      }
-    }
-  }
-}
-
-/* Example usage in components */
+/* Example Usage of Variables in Component Styles */
 .button-primary {
-  background-color: var(--color-primary);
-  color: var(--on-primary);
+  background-color: $color-primary;
+  color: $on-primary;
 }
 
 .button-secondary {
-  background-color: var(--color-secondary);
-  color: var(--on-secondary);
+  background-color: $color-secondary;
+  color: $on-secondary;
 }
 
 .card {
-  background-color: var(--color-surface);
-  color: var(--on-surface);
-  border: 1px solid var(--color-outline);
+  background-color: $color-surface;
+  color: $on-surface;
+  border: 1px solid $color-outline;
+}
+
+.dark-mode .button-primary {
+  background-color: $dark-color-primary;
+  color: $dark-on-primary;
+}
+
+.dark-mode .button-secondary {
+  background-color: $dark-color-secondary;
+  color: $dark-on-secondary;
+}
+
+.dark-mode .card {
+  background-color: $dark-color-surface;
+  color: $dark-on-surface;
+  border: 1px solid $dark-color-outline;
 }
