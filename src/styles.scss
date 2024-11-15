@@ -45,34 +45,4 @@ $myFlix-Angular-client-theme: mat.define-theme(
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.registration-dialog-container .mat-mdc-dialog-container {
-  padding: 0;
-}
 
-.registration-dialog-container .mat-mdc-dialog-surface {
-  border-radius: 8px;
-}
-
-/* Ensure dialog is scrollable if content is too long */
-.registration-dialog-container .mat-mdc-dialog-content {
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-/* Add some padding to the dialog content */
-.registration-card {
-  margin: 0;
-  box-shadow: none;
-}
-
-/* Make sure form fields don't get cut off on mobile */
-@media screen and (max-width: 768px) {
-  .mat-mdc-dialog-container {
-    max-width: 100vw;
-    width: 100vw;
-  }
-
-  .registration-dialog-container .mat-mdc-dialog-content {
-    padding: 12px;
-  }
-}

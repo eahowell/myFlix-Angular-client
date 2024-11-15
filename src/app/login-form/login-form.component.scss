@@ -12,28 +12,6 @@
       padding: 10px 0 !important;
     }
   }
-
-  h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 500;
-    text-align: center;
-
-    @media (max-width: 600px) {
-      font-size: 20px;
-    }
-  }
-
-  .subtitle {
-    text-align: center;
-    color: #666;
-    margin: 16px 0 24px;
-
-    @media (max-width: 600px) {
-      margin: 8px 0 16px;
-      font-size: 14px;
-    }
-  }
 }
 
 .login-form {
@@ -77,4 +55,118 @@
 
 ::ng-deep .mat-mdc-dialog-container {
   padding: 0 !important;
+}
+/* Card Styling */
+.login-card {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-card mat-card-header {
+  margin-bottom: 24px;
+}
+
+.login-card mat-card-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+}
+
+.login-card mat-card-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-top: 8px;
+}
+
+/* Form Layout */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Form Field Styling */
+.mat-mdc-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Custom styling for outlined form fields */
+::ng-deep .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
+  color: rgba(0, 0, 0, 0.12);
+}
+
+::ng-deep .mat-mdc-form-field-appearance-outline:hover .mat-mdc-form-field-outline {
+  opacity: 1;
+}
+
+::ng-deep .mat-mdc-form-field-appearance-outline.mat-focused .mat-mdc-form-field-outline {
+  color: #1976d2;
+}
+
+/* Error Messages */
+mat-error {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Button Styling */
+mat-card-actions {
+  padding: 16px 0 0;
+  margin: 0;
+}
+
+mat-card-actions button {
+  min-width: 120px;
+  margin-left: 8px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .login-card {
+    margin: 16px;
+    padding: 16px;
+  }
+
+  mat-card-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  mat-card-actions button {
+    width: 100%;
+    margin: 4px 0;
+  }
+}
+
+/* Icons Styling */
+mat-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+/* Hints and Helper Text */
+::ng-deep .mat-mdc-form-field-hint {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Focus States */
+::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-form-field-label {
+  color: #1976d2;
+}
+
+/* Date Picker Custom Styling */
+.mat-datepicker-toggle {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+/* Animation for form fields */
+.mat-mdc-form-field {
+  transition: all 0.3s ease;
+}
+
+.mat-mdc-form-field:hover {
+  transform: translateY(-2px);
 }

@@ -1,44 +1,54 @@
-<!-- src/app/login-form/login-form.component.html -->
-<div class="login-container">
-  <h1 mat-dialog-title>Login</h1>
-  <div mat-dialog-content>
-    <p class="subtitle">
-      Login to see all of your favorite movies!
-    </p>
+<div class="dialog-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-subtitle>
+        Login to see all of your favorite movies!
+      </mat-card-subtitle>
+    </mat-card-header>
 
-    <form class="login-form">
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="Username"
-          [(ngModel)]="loginData.Username"
-          type="text"
-          name="Username"
-          #Username="ngModel"
-          required
-        />
-        <mat-error *ngIf="Username.invalid">Username is required</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="Password"
-          [(ngModel)]="loginData.Password"
-          type="password"
-          name="Password"
-          #Password="ngModel"
-          required
-        />
-        <mat-error *ngIf="Password.invalid">Password is required</mat-error>
-      </mat-form-field>
+    <mat-card-content>
+      <form class="login-form" #loginForm="ngForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            [(ngModel)]="loginData.Username"
+            type="text"
+            #Username="ngModel"
+            name="Username"
+            required
+          />
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error>Username is required</mat-error>
+        </mat-form-field>
 
-    </form>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="loginUser()">
-      Login
-    </button>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [(ngModel)]="loginData.Password"
+            type="password"
+            #Password="ngModel"
+            name="Password"
+            required
+          />
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-error>Password is required</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
 
-  </div>
+    <mat-card-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="loginUser()"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>
-
