@@ -11,11 +11,11 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent {
   title = 'myFlix';
-  currentTheme = 'light';
-  toggleTheme() {
-    this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-    document.body.className = this.currentTheme; // Apply the theme class to <body>
-  }
+  // currentTheme = 'light';
+  // toggleTheme() {
+  //   this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+  //   document.body.className = this.currentTheme; // Apply the theme class to <body>
+  // }
   constructor(public dialog: MatDialog) {}
 
   openUserRegistrationDialog(): void {
@@ -23,7 +23,8 @@ export class AppComponent {
       maxWidth: '450px',
       width: '95%',
       maxHeight: '100vh',
-      autoFocus: false
+      autoFocus: false,
+      panelClass: 'registration-dialog-container'
     });
   }
   openLoginDialog(): void {

@@ -1,78 +1,117 @@
-<!-- src/app/user-registration-form/user-registration-form.component.html -->
-<div class="registration-container">
-  <h1 mat-dialog-title>Sign Up!</h1>
-  <div mat-dialog-content>
-    <p class="subtitle">
-      Sign up to keep track of all of your favorite movies!
-    </p>
-    
-    <form class="registration-form">
-      <mat-form-field>
+<div class="dialog-container">
+<mat-card class="registration-card">
+  <mat-card-header>
+    <mat-card-title>Sign Up!</mat-card-title>
+    <mat-card-subtitle
+      >Keep track of all of your favorite movies!</mat-card-subtitle
+    >
+  </mat-card-header>
+
+  <mat-card-content>
+    <form #registrationForm="ngForm" class="registration-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
         <input
           matInput
-          placeholder="Username"
           [(ngModel)]="userData.Username"
-          type="text"
           name="Username"
           #Username="ngModel"
+          pattern="[a-zA-Z0-9]+$]*"
+          minlength="5"
+          maxlength="15"
           required
         />
-        <mat-error *ngIf="Username.invalid">Username is required</mat-error>
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="Username.errors?.['required']"
+          >Username is required</mat-error
+        >
+        <mat-error *ngIf="Username.errors?.['minlength']"
+          >Username must be at least 5 characters</mat-error
+        >
+        <mat-error *ngIf="Username.errors?.['maxlength']"
+          >Username must be less than 15 characters</mat-error
+        >
+        <mat-error *ngIf="Username.errors?.['pattern']"
+          >Username must be alphanumeric</mat-error
+        >
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
         <input
           matInput
-          placeholder="Password"
           [(ngModel)]="userData.Password"
           type="password"
           name="Password"
           #Password="ngModel"
+          minlength="8"
+          maxlength="25"
           required
         />
-        <mat-error *ngIf="Password.invalid">Password is required</mat-error>
+        <mat-icon matSuffix>lock</mat-icon>
+        <mat-hint>Password must be between 8 and 25 characters</mat-hint>
+        <mat-error *ngIf="Password.errors?.['required']"
+          >Password is required</mat-error
+        >
+        <mat-error
+          *ngIf="Password.errors?.['minlength'] || Password.errors?.['maxlength']"
+        >
+          Password must be between 8 and 25 characters
+        </mat-error>
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
         <input
           matInput
-          placeholder="Email"
           [(ngModel)]="userData.Email"
           type="email"
           name="Email"
           #Email="ngModel"
           required
+          email
         />
-        <mat-error *ngIf="Email.invalid">Email is required</mat-error>
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="Email.errors?.['required']"
+          >Email is required</mat-error
+        >
+        <mat-error *ngIf="Email.errors?.['email']"
+          >Please enter a valid email</mat-error
+        >
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Birthday</mat-label>
         <input
           matInput
-          placeholder="Birthday"
           [(ngModel)]="userData.Birthday"
           type="date"
           name="Birthday"
           #Birthday="ngModel"
           required
         />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="Birthday.invalid">Birthday is required</mat-error>
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
         <input
           matInput
-          placeholder="First Name"
           [(ngModel)]="userData.FirstName"
-          type="text"
           name="FirstName"
           #FirstName="ngModel"
           required
         />
         <mat-error *ngIf="FirstName.invalid">First name is required</mat-error>
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
         <input
           matInput
-          placeholder="Last Name"
           [(ngModel)]="userData.LastName"
-          type="text"
           name="LastName"
           #LastName="ngModel"
           required
@@ -80,11 +119,18 @@
         <mat-error *ngIf="LastName.invalid">Last name is required</mat-error>
       </mat-form-field>
     </form>
-  </div>
+  </mat-card-content>
 
-  <div mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="registerUser()">
+  <mat-card-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="registerUser()"
+      [disabled]="registrationForm.invalid"
+    >
       Sign Up
     </button>
-  </div>
+  </mat-card-actions>
+</mat-card>
 </div>
