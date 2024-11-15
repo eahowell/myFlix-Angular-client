@@ -1,0 +1,28 @@
+.movieCardImg {
+  width: 14.5rem;
+  height: auto;
+  margin: 5%;
+  max-height: 350px;
+}
+
+.movieCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5%;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: #212529;
+  box-shadow: 0 0 10px #000;
+  color: #fff;
+
+}
+
+mat-card-title, mat-card-subtitle {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

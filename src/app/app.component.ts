@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -32,6 +33,14 @@ export class AppComponent {
       maxWidth: '450px',
       width: '95%',
       maxHeight: '100vh',
+      autoFocus: false
+    });
+  }
+  openMoviesDialog(): void {
+    const dialogRef = this.dialog.open(MovieCardComponent, {
+      maxWidth: '450px',
+      width: '95%',
+      maxHeight: '95vh',
       autoFocus: false
     });
   }

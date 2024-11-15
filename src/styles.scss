@@ -46,3 +46,46 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+/* Target the mat-dialog-container to ensure proper styling */
+.mat-dialog-container {
+  /* Enable custom scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+}
+
+/* Webkit browsers (Chrome, Safari, newer Edge) */
+.mat-dialog-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.mat-dialog-container::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.mat-dialog-container::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.mat-dialog-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(155, 155, 155, 0.8);
+}
+
+/* Optional: If you want the scrollbar to only appear when hovering */
+.mat-dialog-container {
+  overflow: auto;
+  &:not(:hover)::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+}
+
+/* For Firefox */
+@supports (scrollbar-color: auto) {
+  .mat-dialog-container {
+    scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+    scrollbar-width: thin;
+  }
+}
