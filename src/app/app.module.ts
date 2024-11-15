@@ -22,12 +22,14 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationFormComponent,
     LoginFormComponent,
+    MovieCardComponent,
   ],
   imports: [
     BrowserModule,
