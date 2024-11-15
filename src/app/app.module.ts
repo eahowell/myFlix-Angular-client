@@ -3,6 +3,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 // Angular Material Components
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +24,13 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+
+const appRoutes: Routes = [
+  {path: 'welcome', component: WelcomePageComponent},
+  {path: 'movies', component: MovieCardComponent},
+  {path: '', redirectTo: 'welcome', pathMatch: 'prefix',}
+];
 
 @NgModule({
   declarations: [
@@ -30,6 +38,7 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
     UserRegistrationFormComponent,
     LoginFormComponent,
     MovieCardComponent,
+    WelcomePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +55,7 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
     MatNativeDateModule,
     MatSnackBarModule,
     FormsModule,
+    RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
   ],
   providers: [provideClientHydration(), provideAnimationsAsync()],
