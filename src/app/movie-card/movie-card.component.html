@@ -1,12 +1,26 @@
 <!-- src/app/movie-card/movie-card.component.html -->
 <div class="mat-dialog-container">
-<mat-card *ngFor="let movie of movies; let i=index;" class="movieCard">
-  <mat-dialog-content >
-      <mat-card-title>{{movie.Title}}</mat-card-title>
-      <mat-card-subtitle>{{movie.Director.Name}}</mat-card-subtitle>
+  <mat-card *ngFor="let movie of movies; let i = index" class="movieCard">
+    <mat-dialog-content>
+      <mat-card-header>
+        <mat-card-title>{{ movie.Title }}</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
-        <img class = "movieCardImg" src="{{movie.ImagePath}}"/>
+        <img class="movieCardImg" src="{{ movie.ImagePath }}" />
+        <div class="icon-group">
+          <mat-icon>favorite_border</mat-icon>
+          <mat-icon>favorite</mat-icon>
+          <mat-icon>add</mat-icon>
+          <mat-icon>check</mat-icon>
+        </div>
       </mat-card-content>
-  </mat-dialog-content>
-</mat-card>
+      <mat-card-actions>
+        <div class="button-group">
+          <button mat-raised-button color="tertiary">Genre</button>
+          <button mat-raised-button color="tertiary">Director</button>
+          <button mat-raised-button color="tertiary">Synopsis</button>
+        </div>
+      </mat-card-actions>
+    </mat-dialog-content>
+  </mat-card>
 </div>
