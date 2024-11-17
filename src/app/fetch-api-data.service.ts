@@ -4,8 +4,8 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, throwError, catchError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -17,24 +17,40 @@ export class FetchApiDataService {
   // Private method to get headers
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
   }
 
   private extractResponseData(res: any): any {
-    const body = res;
-    return body || {};
+    return res || {};
   }
   private handleError(error: HttpErrorResponse): Observable<never> {
-    console.error('An error occurred:', error);
-    return throwError(() => error);
-}
+    let errorMessage = 'An error occurred';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = `Client Error: ${error.error.message}`;
+    } else {
+      // Server-side error
+      errorMessage = `Server Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
+  }
 
   // CREATE - POST - Allow new users to register;  (username, password, first name, last name, email, date of birth)
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http
-      .post(`${this.apiUrl}/users`, userDetails)
-      .pipe(catchError(this.handleError));
+      .post(`${this.apiUrl}/users`, userDetails, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      })
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
   }
   // CREATE - POST - Allow users to login;  (using username and password)
   public userLogin(username: string, password: string): Observable<any> {
@@ -42,8 +58,15 @@ export class FetchApiDataService {
       .post(`${this.apiUrl}/login`, {
         Username: username,
         Password: password,
+      }, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
       })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
   }
 
   // READ - GET - Return a list of ALL movies to the user
@@ -94,7 +117,7 @@ export class FetchApiDataService {
   // READ - GET - Return data about a director (bio, birth year, death year) by name
   public getDirector(directorName: string): Observable<any> {
     return this.http
-      .get(`${this.apiUrl}/genres/${directorName}`, {
+      .get(`${this.apiUrl}/directors/${directorName}`, {
         headers: this.getHeaders(),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -157,7 +180,7 @@ export class FetchApiDataService {
   // DELETE - Allow users to remove a movie from their list of To Watch
   public deleteToWatch(username: string, MovieID: string): Observable<any> {
     return this.http
-      .put(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {
+      .delete(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {
         headers: this.getHeaders(),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
