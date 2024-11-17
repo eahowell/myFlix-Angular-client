@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+  <span>
+    <img
+      src="myFlixLogo-brand.png"
+      width="143.2"
+      height="40"
+      alt="Logo of myFlix that navigates to the welcome page"
+      title="Navigates to welcome page"
+      priority
+      onclick="window.location.href = '/welcome'"
+      mat-icon-button
+      cursor="pointer"
+  /></span>
+  <span>Welcome back {{ user.Username }}!</span>
+  <button
+    mat-icon-button
+    class="toolbar-icon"
+    aria-label="Logout icon button that logs the user out"
+    title="Logout"
+    (click)="onLogout()"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+
+  <span class="toolbar-spacer"></span>
+  <span>
+    <button
+      mat-icon-button
+      class="toolbar-icon"
+      aria-label="Person icon button that navigates to the user profile page"
+    >
+      <mat-icon>person</mat-icon>
+    </button>
+  </span>
+  <button
+    mat-icon-button
+    class="toolbar-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
