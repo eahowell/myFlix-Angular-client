@@ -1,0 +1,146 @@
+<div class="mat-dialog-container">
+  <mat-card class="registration-card">
+    <mat-card-header>
+      <mat-card-title>Sign Up!</mat-card-title>
+      <mat-card-subtitle>
+        Keep track of all of your favorite movies!
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form #registrationForm="ngForm" class="registration-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.Username"
+            name="Username"
+            #Username="ngModel"
+            pattern="[a-zA-Z0-9]+$]*"
+            minlength="5"
+            maxlength="15"
+            required
+          />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="Username.errors?.['required']"
+            >Username is required</mat-error
+          >
+          <mat-error *ngIf="Username.errors?.['minlength']"
+            >Username must be at least 5 characters</mat-error
+          >
+          <mat-error *ngIf="Username.errors?.['maxlength']"
+            >Username must be less than 15 characters</mat-error
+          >
+          <mat-error *ngIf="Username.errors?.['pattern']"
+            >Username must be alphanumeric</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.Password"
+            type="password"
+            name="Password"
+            #Password="ngModel"
+            minlength="8"
+            maxlength="25"
+            required
+          />
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-hint>Password must be between 8 and 25 characters</mat-hint>
+          <mat-error *ngIf="Password.errors?.['required']"
+            >Password is required</mat-error
+          >
+          <mat-error
+            *ngIf="Password.errors?.['minlength'] || Password.errors?.['maxlength']"
+          >
+            Password must be between 8 and 25 characters
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.Email"
+            type="email"
+            name="Email"
+            #Email="ngModel"
+            required
+            email
+          />
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="Email.errors?.['required']"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="Email.errors?.['email']"
+            >Please enter a valid email</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Birthday</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.Birthday"
+            type="date"
+            name="Birthday"
+            #Birthday="ngModel"
+            required
+          />
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="Birthday.invalid">Birthday is required</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.FirstName"
+            name="FirstName"
+            #FirstName="ngModel"
+            required
+          />
+          <mat-error *ngIf="FirstName.invalid"
+            >First name is required</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.LastName"
+            name="LastName"
+            #LastName="ngModel"
+            required
+          />
+          <mat-error *ngIf="LastName.invalid">Last name is required</mat-error>
+        </mat-form-field>
+        <h3>Favorite Movies</h3>
+        <div class="movies-grid">
+          <app-movie-card
+            *ngFor="let movie of favoriteMovies"
+            [movie]="movie">
+          </app-movie-card>
+        </div>
+
+        <h3>Movies To Watch</h3>
+        <div class="movies-grid">
+          <app-movie-card
+            *ngFor="let movie of toWatchMovies"
+            [movie]="movie">
+          </app-movie-card>
+      </div>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+
+    </mat-card-actions>
+  </mat-card>
+</div>
+

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -26,11 +29,18 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+
+// Services
+import { UserStateService } from './user-state.service';
+import { StorageService } from './local-storage.service';
+import { FetchApiDataService } from './fetch-api-data.service';
 
 const appRoutes: Routes = [
-  {path: 'welcome', component: WelcomePageComponent},
-  {path: 'movies', component: MovieCardComponent},
-  {path: '', redirectTo: 'welcome', pathMatch: 'prefix',}
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: ProfilePageComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
 @NgModule({
@@ -40,6 +50,7 @@ const appRoutes: Routes = [
     LoginFormComponent,
     MovieCardComponent,
     WelcomePageComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +73,10 @@ const appRoutes: Routes = [
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    UserStateService,
+    StorageService,
+    FetchApiDataService,
   ],
   bootstrap: [AppComponent],
 })
