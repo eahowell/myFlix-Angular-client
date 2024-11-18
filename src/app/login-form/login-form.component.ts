@@ -2,6 +2,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { UserStateService } from '../user-state.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -17,17 +18,17 @@ export class LoginFormComponent implements OnInit {
     Password: '',
   };
 
-  constructor (
+  constructor(
     public fetchApiData: FetchApiDataService,
+    private userState: UserStateService,
     public dialogRef: MatDialogRef<LoginFormComponent>,
     public snackBar: MatSnackBar,
     private router: Router
-  ){}
+  ) {}
 
   ngOnInit(): void {}
 
   loginUser(): void {
-    // Ensure username is lowercase before sending to API server
     const loginDataToSend = {
       ...this.loginData,
       Username: this.loginData.Username.toLowerCase()
@@ -35,16 +36,16 @@ export class LoginFormComponent implements OnInit {
 
     this.fetchApiData.userLogin(loginDataToSend.Username, loginDataToSend.Password).subscribe({
       next: (response) => {
-      this.dialogRef.close(); // This will close the modal on success!
-      console.log('User successfully logged in!');
-      localStorage.setItem('user', response.user.Username);
-      localStorage.setItem('token', response.token);
-      this.router.navigate(['movies']);
-      this.snackBar.open('User successfully logged in!', 'OK', {
-        duration: 2000
-      });
-    },
-    error: (error: HttpErrorResponse) => {
+        localStorage.setItem('user', response.user.Username);
+        localStorage.setItem('token', response.token);
+        // UserState service will automatically fetch user data when username is set
+        this.dialogRef.close();
+        this.router.navigate(['movies']);
+        this.snackBar.open('Login successful', 'OK', {
+          duration: 2000
+        });
+      },
+      error: (error: HttpErrorResponse) => {
       console.log('Error status:', error.status);
       console.log('Error body:', error.error);
       let errorMessage = 'Something went wrong! Please try again later.';

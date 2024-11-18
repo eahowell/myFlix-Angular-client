@@ -5,21 +5,25 @@
       width="143.2"
       height="40"
       alt="Logo of myFlix that navigates to the welcome page"
-      title="Navigates to welcome page"
+      matTooltip="Navigate to welcome page"
       priority
-      onclick="window.location.href = '/welcome'"
+      (click)="router.navigate(['welcome'])"
       mat-icon-button
       cursor="pointer"
   /></span>
-  <span>Welcome back {{ user.Username }}!</span>
+  <span>{{ username
+    ? 'Welcome back, ' + username + '!'
+    : 'Login to get back to your favorites!'
+  }}</span>
   <button
     mat-icon-button
     class="toolbar-icon"
     aria-label="Logout icon button that logs the user out"
-    title="Logout"
+    matTooltip="Logout"
     (click)="onLogout()"
+    *ngIf="username"
   >
-    <mat-icon>logout</mat-icon>
+    <mat-icon *ngIf="username">logout</mat-icon>
   </button>
 
   <span class="toolbar-spacer"></span>
@@ -28,6 +32,9 @@
       mat-icon-button
       class="toolbar-icon"
       aria-label="Person icon button that navigates to the user profile page"
+      matTooltip="Profile"
+      (click)="router.navigate(['profile'])"
+      *ngIf="username"
     >
       <mat-icon>person</mat-icon>
     </button>
@@ -36,7 +43,10 @@
     mat-icon-button
     class="toolbar-icon"
     aria-label="Example icon-button with share icon"
+    matTooltip="Movie List"
+    (click)="router.navigate(['movies'])"
+    *ngIf="username"
   >
-    <mat-icon>share</mat-icon>
+    <mat-icon>local_movies</mat-icon>
   </button>
 </mat-toolbar>

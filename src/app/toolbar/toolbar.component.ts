@@ -1,45 +1,64 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { AsyncLocalStorage } from 'async_hooks';
+import { StorageService } from '../local-storage.service';
+import { UserStateService } from '../user-state.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, CommonModule, MatTooltipModule],
 })
-export class ToolbarComponent implements OnInit{
+export class ToolbarComponent implements OnInit, OnDestroy {
+  username: string | null = null;
+  hasToken: boolean = false;
   user: any = {};
-  constructor(public fetchApiData: FetchApiDataService) { }
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    private storageService: StorageService,
+    private userState: UserStateService,
+    public router: Router
+  ) {}
+
   ngOnInit(): void {
-    this.getUser();
+    // Subscribe to user data
+    this.subscriptions.push(
+      this.userState.getUserData().subscribe(userData => {
+        this.user = userData;
+      })
+    );
+
+    // Subscribe to username changes
+    this.subscriptions.push(
+      this.storageService.watchUsername().subscribe((username) => {
+        this.username = username;
+      })
+    );
+
+    // Subscribe to token changes
+    this.subscriptions.push(
+      this.storageService.watchToken().subscribe((token) => {
+        this.hasToken = !!token;
+      })
+    );
   }
 
-  isFavorite(movieId: string): boolean {
-    return this.user.FavoriteMovies.includes(movieId);
+  ngOnDestroy() {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
-  getUser(): void {
-    const username = localStorage.getItem('user');
-  if (username) {
-    this.fetchApiData.getUser(username).subscribe((resp: any) => {
-      this.user = resp;
-      console.log(this.user);
-      return this.user;
-    });
-  } else {
-    console.error('User is null');
+  onLogout(): void {
+    this.storageService.clearLocalStorage();
+    this.router.navigate(['welcome']);
   }
-}
-
-onLogout(): void {
-  localStorage.clear();
-  console.log('You have been logged out');
-  window.open('/', '_self');
-}
-
 }
