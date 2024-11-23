@@ -6,20 +6,24 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { StorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FetchApiDataService {
   private apiUrl = 'https://myflix-eahowell-7d843bf0554c.herokuapp.com';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private storageService: StorageService
+  ) {}
 
   // Private method to get headers
   private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token');
+    const token = this.storageService.getCurrentToken();
     return new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
   }
 
@@ -44,29 +48,27 @@ export class FetchApiDataService {
     return this.http
       .post(`${this.apiUrl}/users`, userDetails, {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
+          'Content-Type': 'application/json',
+        }),
       })
-      .pipe(
-        map(this.extractResponseData),
-        catchError(this.handleError)
-      );
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
   // CREATE - POST - Allow users to login;  (using username and password)
   public userLogin(username: string, password: string): Observable<any> {
     return this.http
-      .post(`${this.apiUrl}/login`, {
-        Username: username,
-        Password: password,
-      }, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      })
-      .pipe(
-        map(this.extractResponseData),
-        catchError(this.handleError)
-      );
+      .post(
+        `${this.apiUrl}/login`,
+        {
+          Username: username,
+          Password: password,
+        },
+        {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+          }),
+        }
+      )
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // READ - GET - Return a list of ALL movies to the user
@@ -151,38 +153,38 @@ export class FetchApiDataService {
   }
 
   // UPDATE - PUT - Allow users to add a movie to their list of favorites
-  public addFavorite(username: string, MovieID: string): Observable<any> {
-    return this.http
-      .put(`${this.apiUrl}/users/${username}/favorites/${MovieID}`, {
-        headers: this.getHeaders(),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
+public addFavorite(username: string, MovieID: string): Observable<any> {
+  return this.http
+    .put(`${this.apiUrl}/users/${username}/favorites/${MovieID}`, {}, { // Added empty object and correct headers format
+      headers: this.getHeaders()
+    })
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
+}
 
-  // DELETE - Allow users to remove a movie from their list of favorites
-  public deleteFavorite(username: string, MovieID: string): Observable<any> {
-    return this.http
-      .delete(`${this.apiUrl}/users/${username}/favorites/${MovieID}`, {
-        headers: this.getHeaders(),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
+// DELETE - Allow users to remove a movie from their list of favorites
+public deleteFavorite(username: string, MovieID: string): Observable<any> {
+  return this.http
+    .delete(`${this.apiUrl}/users/${username}/favorites/${MovieID}`, {
+      headers: this.getHeaders()
+    })
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
+}
 
-  // UPDATE - PUT - Allow users to add movie to the “To Watch” list
-  public addToWatch(username: string, MovieID: string): Observable<any> {
-    return this.http
-      .put(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {
-        headers: this.getHeaders(),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
+// UPDATE - PUT - Allow users to add movie to the "To Watch" list
+public addToWatch(username: string, MovieID: string): Observable<any> {
+  return this.http
+    .put(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {}, { // Added empty object and correct headers format
+      headers: this.getHeaders()
+    })
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
+}
 
-  // DELETE - Allow users to remove a movie from their list of To Watch
-  public deleteToWatch(username: string, MovieID: string): Observable<any> {
-    return this.http
-      .delete(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {
-        headers: this.getHeaders(),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
+// DELETE - Allow users to remove a movie from their list of To Watch
+public deleteToWatch(username: string, MovieID: string): Observable<any> {
+  return this.http
+    .delete(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {
+      headers: this.getHeaders()
+    })
+    .pipe(map(this.extractResponseData), catchError(this.handleError));
+}
 }
