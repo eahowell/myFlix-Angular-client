@@ -1,14 +1,11 @@
 <div class="mat-dialog-container">
-  <mat-card class="registration-card">
+  <mat-card class="profile-card">
     <mat-card-header>
-      <mat-card-title>Sign Up!</mat-card-title>
-      <mat-card-subtitle>
-        Keep track of all of your favorite movies!
-      </mat-card-subtitle>
+      <mat-card-title>User Profile</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-      <form #registrationForm="ngForm" class="registration-form">
+      <form #profileForm="ngForm" class="profile-form">
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
           <input
@@ -20,20 +17,10 @@
             minlength="5"
             maxlength="15"
             required
+            readonly="true"
           />
           <mat-icon matSuffix>person</mat-icon>
-          <mat-error *ngIf="Username.errors?.['required']"
-            >Username is required</mat-error
-          >
-          <mat-error *ngIf="Username.errors?.['minlength']"
-            >Username must be at least 5 characters</mat-error
-          >
-          <mat-error *ngIf="Username.errors?.['maxlength']"
-            >Username must be less than 15 characters</mat-error
-          >
-          <mat-error *ngIf="Username.errors?.['pattern']"
-            >Username must be alphanumeric</mat-error
-          >
+
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -84,14 +71,13 @@
           <mat-label>Birthday</mat-label>
           <input
             matInput
-            [(ngModel)]="user.Birthday"
-            type="date"
+            [ngModel]="user.Birthday | date: 'mm-dd-yyyy'"
             name="Birthday"
             #Birthday="ngModel"
             required
+            readonly="true"
           />
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngIf="Birthday.invalid">Birthday is required</mat-error>
+<mat-icon matSuffix>cake</mat-icon>
         </mat-form-field>
 
 
@@ -120,6 +106,27 @@
           />
           <mat-error *ngIf="LastName.invalid">Last name is required</mat-error>
         </mat-form-field>
+
+
+
+
+      </form>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+
+    </mat-card-actions>
+  </mat-card>
+  <h3>Movies To Watch</h3>
+        <div class="movies-grid">
+          <app-movie-card
+            *ngFor="let movie of toWatchMovies"
+            [movie]="movie"
+            class="movie-card">
+          </app-movie-card>
+      </div>
+
         <h3>Favorite Movies</h3>
         <div class="movies-grid">
           <app-movie-card
@@ -127,20 +134,5 @@
             [movie]="movie">
           </app-movie-card>
         </div>
-
-        <h3>Movies To Watch</h3>
-        <div class="movies-grid">
-          <app-movie-card
-            *ngFor="let movie of toWatchMovies"
-            [movie]="movie">
-          </app-movie-card>
-      </div>
-      </form>
-    </mat-card-content>
-
-    <mat-card-actions align="end">
-
-    </mat-card-actions>
-  </mat-card>
 </div>
 
