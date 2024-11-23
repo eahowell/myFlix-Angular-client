@@ -35,10 +35,11 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { UserStateService } from './user-state.service';
 import { StorageService } from './local-storage.service';
 import { FetchApiDataService } from './fetch-api-data.service';
+import { AllMoviesPageComponent } from './all-movies-page/all-movies-page.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
-  { path: 'movies', component: MovieCardComponent },
+  { path: 'movies', component: AllMoviesPageComponent },
   { path: 'profile', component: ProfilePageComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     MovieCardComponent,
     WelcomePageComponent,
     ProfilePageComponent,
+    AllMoviesPageComponent,
   ],
   imports: [
     BrowserModule,

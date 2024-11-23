@@ -12,8 +12,13 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 
 
 export class MovieCardComponent implements OnInit, OnDestroy {
-  @Input() movie: any[] = [];
-  movies: any[] = [];
+  @Input() movie={
+    _id: '',
+    Title: '',
+    Description: '',
+    ImagePath: ''
+  };
+  // movies: any[] = [];
   user: any = null;
   private subscriptions: Subscription[] = [];
 
@@ -23,7 +28,6 @@ export class MovieCardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getMovies();
     this.subscriptions.push(
       this.userState.getUserData().subscribe((userData) => {
         this.user = userData;
@@ -51,9 +55,8 @@ export class MovieCardComponent implements OnInit, OnDestroy {
       });
     }
   }
-
   isToWatch(movieId: string): boolean {
-    return this.user?.toWatch?.includes(movieId) || false;
+    return this.user?.ToWatch?.includes(movieId) || false;
   }
 
   toggleToWatch(movieId: string): void {
@@ -71,11 +74,5 @@ export class MovieCardComponent implements OnInit, OnDestroy {
     }
   }
 
-  getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      console.log(this.movies);
-      return this.movies;
-    });
-  }
+
 }

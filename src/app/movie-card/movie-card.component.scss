@@ -1,14 +1,11 @@
 .mat-dialog-container {
   display: flex;
-  padding: 1%;
-  margin-top: 1%;
 }
 
 .movieCardImg {
   width: 100%;
   height: auto;
-  // margin: 5%;
-  max-height: 325px;
+  max-height: 300px;
 }
 
 mat-card {
@@ -25,21 +22,22 @@ mat-card {
 
 }
 
-mat-card-header, mat-card-title, mat-card-subtitle {
-  color: #fff;
+mat-card-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 1px solid #000;
+  background-color: #f7ab08da;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 15px;
 }
 
 mat-card-title{
-  font-size: 1.5rem;
-  padding-bottom: 1%;
-}
-mat-card-subtitle{
-  font-size: 0.75rem;
-  padding-bottom: 2%;
+  color: black;
+  font-size: 1.0rem;
+
 }
 
 hr{
