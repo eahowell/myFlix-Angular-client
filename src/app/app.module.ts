@@ -36,6 +36,7 @@ import { UserStateService } from './user-state.service';
 import { StorageService } from './local-storage.service';
 import { FetchApiDataService } from './fetch-api-data.service';
 import { AllMoviesPageComponent } from './all-movies-page/all-movies-page.component';
+import { GenreDialogComponent } from './genre-dialog/genre-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -53,6 +54,7 @@ const appRoutes: Routes = [
     WelcomePageComponent,
     ProfilePageComponent,
     AllMoviesPageComponent,
+    GenreDialogComponent,
   ],
   imports: [
     BrowserModule,

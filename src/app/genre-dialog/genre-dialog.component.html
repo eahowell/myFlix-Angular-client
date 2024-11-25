@@ -1,0 +1,28 @@
+<div class="genre-dialog-container">
+  <h1 matDialogTitle class="title" >  {{movie.Title}} - Genre  <hr/></h1>
+
+
+  <mat-dialog-content>
+    <mat-card class="genre-description">
+
+        <h2> {{movie.Genre.Name}} </h2>
+        <p> {{movie.Genre.Description}} </p>
+    </mat-card>
+
+    <!-- <h3>Movies in this genre</h3>
+    <div class="movies-grid mat-dialog-container">
+      <app-movie-card
+        *ngFor="let movie of moviesInSameGenre"
+        [movie]="movie"
+        class="movie-card">
+      </app-movie-card>
+  </div> -->
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+      <button mat-button matDialogClose>Close dialog</button>
+
+  </mat-dialog-actions>
+
+</div>

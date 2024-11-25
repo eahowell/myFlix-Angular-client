@@ -3,6 +3,8 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { UserStateService } from '../user-state.service';
 import { Subscription } from 'rxjs';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -16,7 +18,9 @@ export class MovieCardComponent implements OnInit, OnDestroy {
     _id: '',
     Title: '',
     Description: '',
-    ImagePath: ''
+    ImagePath: '',
+    Genre: {Name: '', Description: ''},
+    Director: {Name: '', Bio: '', Birthday: '', Death_day: '', TopMovies:{Title: ''}},
   };
   // movies: any[] = [];
   user: any = null;
@@ -24,7 +28,8 @@ export class MovieCardComponent implements OnInit, OnDestroy {
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    private userState: UserStateService
+    private userState: UserStateService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +78,15 @@ export class MovieCardComponent implements OnInit, OnDestroy {
       });
     }
   }
-
+  openGenreDialog(movie: any): void {
+    const dialogRef = this.dialog.open(GenreDialogComponent, {
+      maxWidth: '450px',
+      width: '95%',
+      maxHeight: '100vh',
+      autoFocus: false,
+      panelClass: 'genre-dialog-container',
+      data: { movie: movie }
+    });
+  }
 
 }
