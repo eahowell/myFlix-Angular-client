@@ -71,7 +71,7 @@
           <mat-label>Birthday</mat-label>
           <input
             matInput
-            [ngModel]="user.Birthday | date: 'mm-dd-yyyy'"
+            [ngModel]="user.Birthday | date"
             name="Birthday"
             #Birthday="ngModel"
             required

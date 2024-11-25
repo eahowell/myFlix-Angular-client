@@ -1,0 +1,25 @@
+
+<div class="director-dialog-container">
+  <h1 matDialogTitle class="title" >  {{movie.Title}} - Director  <hr/></h1>
+
+
+  <mat-dialog-content>
+    <mat-card class="director-description">
+
+        <h2> {{movie.Director.Name}} </h2>
+         <p> <strong>Bio:</strong> {{movie.Director.Bio}} </p>
+        <p> <strong>Birthday:</strong> {{movie.Director.Birthday | date}} </p>
+        <p><strong> Death:</strong> {{ movie.Director.Death_day ? (movie.Director.Death_day | date) : '---' }} </p>
+
+
+    </mat-card>
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+      <button mat-button matDialogClose>Close</button>
+
+  </mat-dialog-actions>
+
+</div>

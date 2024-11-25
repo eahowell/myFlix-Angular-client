@@ -37,6 +37,7 @@ import { StorageService } from './local-storage.service';
 import { FetchApiDataService } from './fetch-api-data.service';
 import { AllMoviesPageComponent } from './all-movies-page/all-movies-page.component';
 import { GenreDialogComponent } from './genre-dialog/genre-dialog.component';
+import { DirectorDialogComponent } from './director-dialog/director-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
     ProfilePageComponent,
     AllMoviesPageComponent,
     GenreDialogComponent,
+    DirectorDialogComponent,
   ],
   imports: [
     BrowserModule,

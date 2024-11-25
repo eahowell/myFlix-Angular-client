@@ -16,7 +16,7 @@ export class GenreDialogComponent implements OnInit {
     Description: '',
     ImagePath: '',
     Genre: {Name: '', Description: ''},
-    Director: {Name: '', Bio: '', Birthday: '', Death_day: '', TopMovies:{Title: ''}},
+    Director: {Name: '', Bio: '', Birthday: '', Death_day: ''},
   };
   moviesInSameGenre: any[] = [];
 

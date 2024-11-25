@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
+import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -85,6 +86,16 @@ export class MovieCardComponent implements OnInit, OnDestroy {
       maxHeight: '100vh',
       autoFocus: false,
       panelClass: 'genre-dialog-container',
+      data: { movie: movie }
+    });
+  }
+  openDirectorDialog(movie: any): void {
+    const dialogRef = this.dialog.open(DirectorDialogComponent, {
+      maxWidth: '450px',
+      width: '95%',
+      maxHeight: '100vh',
+      autoFocus: false,
+      panelClass: 'director-dialog-container',
       data: { movie: movie }
     });
   }
