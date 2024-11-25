@@ -38,6 +38,7 @@ import { FetchApiDataService } from './fetch-api-data.service';
 import { AllMoviesPageComponent } from './all-movies-page/all-movies-page.component';
 import { GenreDialogComponent } from './genre-dialog/genre-dialog.component';
 import { DirectorDialogComponent } from './director-dialog/director-dialog.component';
+import { SynopsisDialogComponent } from './synopsis-dialog/synopsis-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     AllMoviesPageComponent,
     GenreDialogComponent,
     DirectorDialogComponent,
+    SynopsisDialogComponent,
   ],
   imports: [
     BrowserModule,
