@@ -1,0 +1,8 @@
+
+.content {
+  /* Add padding equal to your toolbar height to prevent content from hiding behind the toolbar */
+  padding-top: 64px;
+  @media screen and (max-width: 599px) {
+    padding-top: 56px;
+  }
+}
