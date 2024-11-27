@@ -1,3 +1,4 @@
+import { MovieCardModule } from './movie-card/movie-card.module';
 import { NgModule } from '@angular/core';
 import {
   BrowserModule,
@@ -7,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
+
 
 // Angular Material Components
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltip } from '@angular/material/tooltip';
 
 // Application Modules and Components
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +30,6 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
@@ -39,7 +42,6 @@ import { AllMoviesPageComponent } from './all-movies-page/all-movies-page.compon
 import { GenreDialogComponent } from './genre-dialog/genre-dialog.component';
 import { DirectorDialogComponent } from './director-dialog/director-dialog.component';
 import { SynopsisDialogComponent } from './synopsis-dialog/synopsis-dialog.component';
-
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: AllMoviesPageComponent },
@@ -52,8 +54,6 @@ const appRoutes: Routes = [
     AppComponent,
     UserRegistrationFormComponent,
     LoginFormComponent,
-    MovieCardComponent,
-    WelcomePageComponent,
     ProfilePageComponent,
     AllMoviesPageComponent,
     GenreDialogComponent,
@@ -63,6 +63,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MovieCardModule,
     MatToolbarModule,
     MatIconModule,
     MatInputModule,
@@ -73,10 +74,13 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatSnackBarModule,
+    MatTooltip,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     ToolbarComponent,
+    WelcomePageComponent,
   ],
   providers: [
     provideClientHydration(),
