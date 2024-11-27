@@ -5,12 +5,13 @@
       <div class="button-group">
         <button
           mat-raised-button
+          matTooltip="Sign up for a new account"
           (click)="openUserRegistrationDialog()"
           color="primary"
         >
           Sign Up
         </button>
-        <button mat-raised-button (click)="openLoginDialog()" color="primary">
+        <button mat-raised-button matTooltip="Login" (click)="openLoginDialog()" color="primary">
           Login
         </button>
       </div>
