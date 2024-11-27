@@ -14,9 +14,9 @@ export class UserStateService {
     private storageService: StorageService
   ) {
     // Initialize user data when service starts
-    this.storageService.watchUsername().subscribe(username => {
-      if (username) {
-        this.loadUserData(username);
+    this.storageService.watchUsername().subscribe(user => {
+      if (user) {
+        this.loadUserData(user);
       } else {
         this.userSubject.next(null);
       }
