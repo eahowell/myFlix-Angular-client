@@ -1,26 +1,73 @@
 <!-- src/app/movie-card/movie-card.component.html -->
-  <mat-card   >
-    <mat-dialog-content>
-      <mat-card-header>
-        <mat-card-title>{{ movie.Title }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <img class="movieCardImg" src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
-        <div class="icon-group">
-          <mat-icon (click)="toggleFavorite(movie._id)">
-            {{isFavorite(movie._id) ? 'favorite' : 'favorite_border'}}
-          </mat-icon>
-          <mat-icon (click)="toggleToWatch(movie._id)"> {{isToWatch(movie._id)? 'check' : 'add'}}</mat-icon>
-        </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <div class="button-group">
-          <button mat-raised-button (click)="openGenreDialog(movie)" color="tertiary" >Genre</button>
-          <button mat-raised-button (click)="openDirectorDialog(movie)" color="tertiary">Director</button>
-          <button mat-raised-button (click)="openSynopsisDialog(movie)" color="tertiary">Synopsis</button>
-        </div>
-      </mat-card-actions>
-    </mat-dialog-content>
-  </mat-card>
+<mat-card>
+  <mat-dialog-content>
+    <mat-card-header>
+      <mat-card-title>{{ movie.Title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <img
+        class="movieCardImg"
+        src="{{ movie.ImagePath }}"
+        alt="{{ movie.Title }}"
+      />
+      <div class="icon-group">
+        <button
+          mat-icon-button
+          class="icon-button"
+          [matTooltip]="
+            isFavorite(movie._id)
+              ? 'Click to remove from favorites'
+              : 'Click to add to favorites'
+          "
+          (click)="toggleFavorite(movie._id)"
+        >
+        <mat-icon >
+          {{isFavorite(movie._id) ? 'favorite' : 'favorite_border'}}
+        </mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          class="icon-button"
+          [matTooltip]="
+            isToWatch(movie._id)
+              ? 'Click to remove from watch list'
+              : 'Click to add to watch list'
+          "
+          (click)="toggleToWatch(movie._id)"
+        >
+        <mat-icon> {{isToWatch(movie._id)? 'check' : 'add'}}</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="button-group">
+        <button
+          mat-button
+          [matTooltip]="'View details about ' + movie.Genre.Name + ' genre'"
+          (click)="openGenreDialog(movie)"
+        >
+          Genre
+        </button>
 
+        <button
+          mat-button
+          [matTooltip]="'Learn more about director ' + movie.Director.Name"
+          (click)="openDirectorDialog(movie)"
+        >
+          Director
+        </button>
 
+        <button
+          mat-button
+          [matTooltip]="'Read the full synopsis of ' + movie.Title"
+          (click)="openSynopsisDialog(movie)"
+        >
+          Synopsis
+        </button>
+        <!-- <button mat-raised-button matTooltip="View genre details" (click)="openGenreDialog(movie)" color="tertiary"  >Genre</button>
+          <button mat-raised-button matTooltip="View director info" (click)="openDirectorDialog(movie)" color="tertiary">Director</button>
+          <button mat-raised-button matTooltip="View movie synopsis" (click)="openSynopsisDialog(movie)" color="tertiary">Synopsis</button> -->
+      </div>
+    </mat-card-actions>
+  </mat-dialog-content>
+</mat-card>

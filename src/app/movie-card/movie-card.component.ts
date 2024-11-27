@@ -1,4 +1,4 @@
-// src/app/movie-card/movie-card.component.ts
+// movie-card.component.ts
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { UserStateService } from '../user-state.service';
 import { Subscription } from 'rxjs';
@@ -14,8 +14,8 @@ import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.comp
   styleUrl: './movie-card.component.scss',
 })
 
-
 export class MovieCardComponent implements OnInit, OnDestroy {
+
   @Input() movie={
     _id: '',
     Title: '',
@@ -24,15 +24,17 @@ export class MovieCardComponent implements OnInit, OnDestroy {
     Genre: {Name: '', Description: ''},
     Director: {Name: '', Bio: '', Birthday: '', Death_day: '', TopMovies:{Title: ''}},
   };
-  // movies: any[] = [];
+
   user: any = null;
   private subscriptions: Subscription[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
     private userState: UserStateService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
+
+
 
   ngOnInit(): void {
     this.subscriptions.push(
