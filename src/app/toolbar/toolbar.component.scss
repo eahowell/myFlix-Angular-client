@@ -16,3 +16,10 @@ mat-icon {
   color: white;
 }
 
+.fixed-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* This ensures the toolbar stays above other content*/
+}
