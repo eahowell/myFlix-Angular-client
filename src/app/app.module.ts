@@ -83,7 +83,7 @@ const appRoutes: Routes = [
     WelcomePageComponent,
   ],
   providers: [
-    provideClientHydration(),
+    // provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     UserStateService,
