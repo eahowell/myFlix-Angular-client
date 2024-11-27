@@ -17,6 +17,7 @@
             minlength="5"
             maxlength="15"
             required
+            disabled="true"
             readonly="true"
           />
           <mat-icon matSuffix>person</mat-icon>
@@ -34,6 +35,7 @@
             minlength="8"
             maxlength="25"
             required
+            [disabled]="!editMode"
           />
           <mat-icon matSuffix>lock</mat-icon>
           <mat-hint>Password must be between 8 and 25 characters</mat-hint>
@@ -56,6 +58,7 @@
             name="Email"
             #Email="ngModel"
             required
+            [disabled]="!editMode"
             email
           />
           <mat-icon matSuffix>email</mat-icon>
@@ -75,6 +78,7 @@
             name="Birthday"
             #Birthday="ngModel"
             required
+            disabled="true"
             readonly="true"
           />
 <mat-icon matSuffix>cake</mat-icon>
@@ -89,6 +93,7 @@
             name="FirstName"
             #FirstName="ngModel"
             required
+            [disabled]="!editMode"
           />
           <mat-error *ngIf="FirstName.invalid"
             >First name is required</mat-error
@@ -103,6 +108,7 @@
             name="LastName"
             #LastName="ngModel"
             required
+            [disabled]="!editMode"
           />
           <mat-error *ngIf="LastName.invalid">Last name is required</mat-error>
         </mat-form-field>
@@ -115,24 +121,33 @@
     </mat-card-content>
 
     <mat-card-actions align="end">
-
+      <button mat-raised-button (click)="toggleEditMode()" [hidden]="editMode">Edit</button>
+      <button mat-raised-button color="primary" [hidden]="!editMode">Save</button>
+      <button mat-raised-button (click)="cancelEdit()" color="primary" [hidden]="!editMode">Cancel</button>
     </mat-card-actions>
   </mat-card>
-  <h3>Movies To Watch</h3>
-        <div class="movies-grid">
-          <app-movie-card
-            *ngFor="let movie of toWatchMovies"
-            [movie]="movie"
-            class="movie-card">
-          </app-movie-card>
-      </div>
+  <div class="fav-movies-container">
+    <h3>Movies To Watch</h3>
+    <div *ngIf="toWatchMovies.length==0" class="list-message">Oh no, you don't have any movies on your To Watch list. Click that + button on the movies page to add some! </div>
+          <div class="movies-grid">
+            <app-movie-card
+              *ngFor="let movie of toWatchMovies"
+              [movie]="movie"
+              class="movie-card">
+            </app-movie-card>
+        </div>
+  </div>
 
-        <h3>Favorite Movies</h3>
-        <div class="movies-grid">
-          <app-movie-card
-            *ngFor="let movie of favoriteMovies"
-            [movie]="movie">
-          </app-movie-card>
+        <div class="fav-movies-container">
+          <h3>Favorite Movies</h3>
+          <div *ngIf="favoriteMovies.length==0" class="list-message">Oh no, you don't have any movies on your Favorites list. Click that ♡ button on the movies page to add some! </div>
+          <div class="movies-grid">
+              <app-movie-card
+                *ngFor="let movie of favoriteMovies"
+                [movie]="movie"
+                >
+              </app-movie-card>
+          </div>
         </div>
 </div>
 
