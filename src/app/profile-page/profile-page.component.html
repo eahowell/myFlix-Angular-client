@@ -24,7 +24,7 @@
 
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
           <input
             matInput
@@ -34,7 +34,7 @@
             #Password="ngModel"
             minlength="8"
             maxlength="25"
-            required
+            autocomplete="off"
             [disabled]="!editMode"
           />
           <mat-icon matSuffix>lock</mat-icon>
@@ -46,8 +46,8 @@
             *ngIf="Password.errors?.['minlength'] || Password.errors?.['maxlength']"
           >
             Password must be between 8 and 25 characters
-          </mat-error>
-        </mat-form-field>
+          </mat-error> -->
+        <!-- </mat-form-field> -->
 
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
@@ -121,8 +121,8 @@
     </mat-card-content>
 
     <mat-card-actions align="end">
-      <button mat-raised-button (click)="toggleEditMode()" [hidden]="editMode">Edit</button>
-      <button mat-raised-button color="primary" [hidden]="!editMode">Save</button>
+      <button mat-raised-button (click)="toggleEditMode()" color="primary" [hidden]="editMode">Edit</button>
+      <button mat-raised-button (click)="saveChanges()" color="primary" [hidden]="!editMode" >Save</button>
       <button mat-raised-button (click)="cancelEdit()" color="primary" [hidden]="!editMode">Cancel</button>
     </mat-card-actions>
   </mat-card>
