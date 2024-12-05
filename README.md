@@ -1,5 +1,5 @@
 ![myFlix Logo](public/myFlixLogo-Light.png)
-# Welcom to the myFlix Client (Angular)
+# Welcome to the myFlix Client (Angular)
 ![GitHub issues](https://img.shields.io/github/issues/eahowell/myFlix-Angular-client?color=yellow)
 ![GitHub Repo stars](https://img.shields.io/github/stars/eahowell/myFlix-Angular-client)
 ![GitHub forks](https://img.shields.io/github/forks/eahowell/myFlix-Angular-client)
@@ -55,13 +55,13 @@ Users can access information about movies, directors, and genres.
 #### Non-logged Users
 - Brand Logo → Homepage
 - Login Button → Login View
-- Signup Button → Signup View
+- Sign-Up Button → Sign-Up View
 
 ### Core Views
 #### Homepage
 - App Title
 - Navigation Toolbar
-- Login/Signup buttons
+- Login/Sign-Up buttons
 
 #### Movie List (Authenticated)
 - Search functionality
@@ -93,11 +93,11 @@ Users can create a profile to save data about their favorite movies
 #### Login
 - Username/Password fields
 - Sign in with API authentication
-- Signup redirect
+- Sign-Up redirect
 - Password reset
 - Form validation
 
-#### Signup
+#### Sign-Up
 - Required fields:
   - Username
   - Password + confirmation
@@ -160,3 +160,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## License
 - API uses ISC
+- Angular uses MIT https://angular.dev/license
+- RxJS uses Apache-2.0 http://www.apache.org/licenses/
+- tslib uses 0BSD
