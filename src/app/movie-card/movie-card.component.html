@@ -16,8 +16,8 @@
           class="icon-button"
           [matTooltip]="
             isFavorite(movie._id)
-              ? 'Click to remove from favorites'
-              : 'Click to add to favorites'
+              ? 'Click to REMOVE from Favorites'
+              : 'Click to ADD to Favorites'
           "
           (click)="toggleFavorite(movie._id)"
         >
@@ -30,8 +30,8 @@
           class="icon-button"
           [matTooltip]="
             isToWatch(movie._id)
-              ? 'Click to remove from watch list'
-              : 'Click to add to watch list'
+              ? 'Click to REMOVE from To Watch list'
+              : 'Click to ADD to To Watch list'
           "
           (click)="toggleToWatch(movie._id)"
         >
@@ -43,7 +43,7 @@
       <div class="button-group">
         <button
           mat-button
-          [matTooltip]="'View details about ' + movie.Genre.Name + ' genre'"
+          [matTooltip]="'View details about the ' + movie.Genre.Name + ' Genre'"
           (click)="openGenreDialog(movie)"
         >
           Genre
@@ -59,14 +59,11 @@
 
         <button
           mat-button
-          [matTooltip]="'Read the full synopsis of ' + movie.Title"
+          [matTooltip]="'Read the synopsis of ' + movie.Title"
           (click)="openSynopsisDialog(movie)"
         >
           Synopsis
         </button>
-        <!-- <button mat-raised-button matTooltip="View genre details" (click)="openGenreDialog(movie)" color="tertiary"  >Genre</button>
-          <button mat-raised-button matTooltip="View director info" (click)="openDirectorDialog(movie)" color="tertiary">Director</button>
-          <button mat-raised-button matTooltip="View movie synopsis" (click)="openSynopsisDialog(movie)" color="tertiary">Synopsis</button> -->
       </div>
     </mat-card-actions>
   </mat-dialog-content>
