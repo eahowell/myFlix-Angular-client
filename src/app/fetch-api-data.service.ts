@@ -136,8 +136,9 @@ export class FetchApiDataService {
   // UPDATE - PUT - Allow users to update their user info (email, first name, last name, and password)
   // Only those fields can be updated because we don't want username, userID, and DOB to be changed
   public updateUser(userDetails: any): Observable<any> {
+    console.log({ ...userDetails });
     return this.http
-      .put(`${this.apiUrl}/users/${userDetails.username}`, userDetails, {
+      .put(`${this.apiUrl}/users/${userDetails.Username}`, userDetails, {
         headers: this.getHeaders(),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -153,38 +154,46 @@ export class FetchApiDataService {
   }
 
   // UPDATE - PUT - Allow users to add a movie to their list of favorites
-public addFavorite(username: string, MovieID: string): Observable<any> {
-  return this.http
-    .put(`${this.apiUrl}/users/${username}/favorites/${MovieID}`, {}, { // Added empty object and correct headers format
-      headers: this.getHeaders()
-    })
-    .pipe(map(this.extractResponseData), catchError(this.handleError));
-}
+  public addFavorite(username: string, MovieID: string): Observable<any> {
+    return this.http
+      .put(
+        `${this.apiUrl}/users/${username}/favorites/${MovieID}`,
+        {},
+        {
+          headers: this.getHeaders(),
+        }
+      )
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
 
-// DELETE - Allow users to remove a movie from their list of favorites
-public deleteFavorite(username: string, MovieID: string): Observable<any> {
-  return this.http
-    .delete(`${this.apiUrl}/users/${username}/favorites/${MovieID}`, {
-      headers: this.getHeaders()
-    })
-    .pipe(map(this.extractResponseData), catchError(this.handleError));
-}
+  // DELETE - Allow users to remove a movie from their list of favorites
+  public deleteFavorite(username: string, MovieID: string): Observable<any> {
+    return this.http
+      .delete(`${this.apiUrl}/users/${username}/favorites/${MovieID}`, {
+        headers: this.getHeaders(),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
 
-// UPDATE - PUT - Allow users to add movie to the "To Watch" list
-public addToWatch(username: string, MovieID: string): Observable<any> {
-  return this.http
-    .put(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {}, { // Added empty object and correct headers format
-      headers: this.getHeaders()
-    })
-    .pipe(map(this.extractResponseData), catchError(this.handleError));
-}
+  // UPDATE - PUT - Allow users to add movie to the "To Watch" list
+  public addToWatch(username: string, MovieID: string): Observable<any> {
+    return this.http
+      .put(
+        `${this.apiUrl}/users/${username}/toWatch/${MovieID}`,
+        {},
+        {
+          headers: this.getHeaders(),
+        }
+      )
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
 
-// DELETE - Allow users to remove a movie from their list of To Watch
-public deleteToWatch(username: string, MovieID: string): Observable<any> {
-  return this.http
-    .delete(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {
-      headers: this.getHeaders()
-    })
-    .pipe(map(this.extractResponseData), catchError(this.handleError));
-}
+  // DELETE - Allow users to remove a movie from their list of To Watch
+  public deleteToWatch(username: string, MovieID: string): Observable<any> {
+    return this.http
+      .delete(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {
+        headers: this.getHeaders(),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
 }
