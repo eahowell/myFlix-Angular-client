@@ -10,7 +10,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 
-
 // Angular Material Components
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -23,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltip } from '@angular/material/tooltip';
+import { IMAGE_CONFIG } from '@angular/common';
 
 // Application Modules and Components
 import { AppRoutingModule } from './app-routing.module';
@@ -85,10 +85,12 @@ const appRoutes: Routes = [
   providers: [
     // provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()),
+    // provideHttpClient(withFetch()),
+    provideHttpClient(),
     UserStateService,
     StorageService,
     FetchApiDataService,
+    { provide: IMAGE_CONFIG, useValue: { disableImageSizeWarning: true, disableImageLazyLoadWarning: true } },
   ],
   bootstrap: [AppComponent],
 })
