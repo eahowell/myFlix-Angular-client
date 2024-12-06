@@ -5,6 +5,15 @@ import { Subscription } from 'rxjs';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+interface UserUpdateData {
+  Username: string;
+  Email: string;
+  Birthday: Date | string;
+  FirstName: string;
+  LastName: string;
+  Password?: string;
+}
+
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
@@ -17,6 +26,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   favoriteMovies: any[] = [];
   toWatchMovies: any[] = [];
   editMode: boolean = false;
+  newPassword: string = '';
   private subscriptions: Subscription[] = [];
   private allMovies: any[] = [];
 
@@ -64,21 +74,35 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     });
   }
   updateProfile(updatedData: any): void {
-    this.fetchApiData.updateUser(this.user).subscribe({
+    const dataToUpdate: UserUpdateData = {
+      Username: this.user.Username,
+      Email: this.user.Email,
+      Birthday: this.user.Birthday,
+      FirstName: this.user.FirstName,
+      LastName: this.user.LastName
+    };
+
+    // Only include password if a new one was entered
+    if (this.newPassword) {
+      dataToUpdate.Password = this.newPassword;
+    }
+
+    this.fetchApiData.updateUser(dataToUpdate).subscribe({
       next: (response) => {
-        this.user = response;
+        this.userState.updateUserData(response);
+        this.newPassword = ''; // Clear password field after successful update
         this.snackBar.open('Profile updated successfully', 'OK', {
           duration: 2000,
         });
       },
       error: (error) => {
-        console.log(error);
-        this.snackBar.open('Failed to update profile', 'OK', {
+        console.error('Update error:', error);
+        this.snackBar.open(error.error || 'Failed to update profile', 'OK', {
           duration: 2000,
         });
       },
     });
-  }
+}
 
   saveChanges() {
     this.updateProfile(this.user);
