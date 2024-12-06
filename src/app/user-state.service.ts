@@ -14,16 +14,23 @@ export class UserStateService {
     private storageService: StorageService
   ) {
     // Initialize user data when service starts
-    this.storageService.watchUsername().subscribe(user => {
+    this.storageService.watchUsername().subscribe((user) => {
       if (user) {
         this.loadUserData(user);
       } else {
         this.userSubject.next(null);
       }
     });
+    this.storageService.watchToken().subscribe(token => {
+      const username = this.storageService.getCurrentUsername();
+      if (username && token) {
+        this.loadUserData(username);
+      }
+    });
   }
 
   private loadUserData(username: string): void {
+    this.storageService.getCurrentToken();
     this.fetchApiData.getUser(username).subscribe({
       next: (userData) => {
         this.userSubject.next(userData);

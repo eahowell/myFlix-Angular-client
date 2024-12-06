@@ -6,6 +6,7 @@ import { UserStateService } from '../user-state.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { StorageService } from '../local-storage.service';
 
 @Component({
   selector: 'app-login-form',
@@ -23,7 +24,8 @@ export class LoginFormComponent implements OnInit {
     private userState: UserStateService,
     public dialogRef: MatDialogRef<LoginFormComponent>,
     public snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {}
@@ -36,8 +38,8 @@ export class LoginFormComponent implements OnInit {
 
     this.fetchApiData.userLogin(loginDataToSend.Username, loginDataToSend.Password).subscribe({
       next: (response) => {
-        localStorage.setItem('user', response.user.Username);
-        localStorage.setItem('token', response.token);
+        this.storageService.setToken(response.token);
+    this.storageService.setUsername(response.user.Username);
         // UserState service will automatically fetch user data when username is set
         this.dialogRef.close();
         this.router.navigate(['movies']);
