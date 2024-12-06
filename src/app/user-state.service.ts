@@ -30,7 +30,6 @@ export class UserStateService {
   }
 
   private loadUserData(username: string): void {
-    this.storageService.getCurrentToken();
     this.fetchApiData.getUser(username).subscribe({
       next: (userData) => {
         this.userSubject.next(userData);

@@ -4,12 +4,11 @@ import { UserStateService } from '../user-state.service';
 import { Subscription } from 'rxjs';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormControl, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.scss']
+  styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
   user: any = null;
@@ -19,6 +18,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   toWatchMovies: any[] = [];
   editMode: boolean = false;
   private subscriptions: Subscription[] = [];
+  private allMovies: any[] = [];
 
   constructor(
     private userState: UserStateService,
@@ -30,12 +30,11 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.userState.getUserData().subscribe((userData) => {
         this.user = userData;
-        console.log(userData);
-        if (userData?.FavoriteMovies?.length) {
-          this.loadFavoriteMovies();
-        }
-        if (userData?.ToWatch.length) {
-          this.loadToWatchMovies();
+        if (
+          userData &&
+          (userData?.FavoriteMovies?.length || userData?.ToWatch?.length)
+        ) {
+          this.loadUserMovies();
         }
       })
     );
@@ -45,32 +44,20 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
-  loadFavoriteMovies(): void {
+  loadUserMovies(): void {
     this.fetchApiData.getAllMovies().subscribe({
       next: (movies) => {
+        this.allMovies = movies;
         this.favoriteMovies = movies.filter((movie: any) =>
           this.user.FavoriteMovies.includes(movie._id)
         );
-      },
-      error: (error) => {
-        console.log(error);
-        this.snackBar.open('Error loading favorite movies', 'OK', {
-          duration: 2000,
-        });
-      },
-    });
-  }
-
-  loadToWatchMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe({
-      next: (movies) => {
         this.toWatchMovies = movies.filter((movie: any) =>
           this.user.ToWatch.includes(movie._id)
         );
       },
       error: (error) => {
         console.log(error);
-        this.snackBar.open('Error loading to watch movies', 'OK', {
+        this.snackBar.open('Error loading movies', 'OK', {
           duration: 2000,
         });
       },
@@ -92,8 +79,6 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       },
     });
   }
-
-
 
   saveChanges() {
     this.updateProfile(this.user);
