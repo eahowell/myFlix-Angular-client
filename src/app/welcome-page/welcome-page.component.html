@@ -1,8 +1,14 @@
 <main class="main">
   <div class="app-container">
     <div class="content-wrapper">
-      <h1>Welcome to myFlix!</h1>
-      <div class="button-group">
+      <h1>
+        {{
+          username
+            ? "Welcome back to myFlix, " + username + "!"
+            : "Welcome to myFlix!"
+        }}
+      </h1>
+      <div class="button-group" *ngIf="!username">
         <button
           mat-raised-button
           matTooltip="Sign up for a new account"
@@ -11,11 +17,42 @@
         >
           Sign Up
         </button>
-        <button mat-raised-button matTooltip="Login" (click)="openLoginDialog()" color="primary">
+        <button
+          mat-raised-button
+          matTooltip="Login"
+          (click)="openLoginDialog()"
+          color="primary"
+        >
           Login
+        </button>
+      </div>
+      <div class="button-group" *ngIf="username">
+        <button
+          mat-raised-button
+          aria-label="Logout button that logs the user out"
+          matTooltip="Logout"
+          (click)="onLogout()"
+          color="primary"
+        >
+          Logout <mat-icon>logout</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          matTooltip="Login"
+          (click)="router.navigate(['movies'])"
+          color="primary"
+        >
+          View movies <mat-icon>local_movies</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          matTooltip="Login"
+          (click)="router.navigate(['profile'])"
+          color="primary"
+        >
+          Visit Profile <mat-icon>person</mat-icon>
         </button>
       </div>
     </div>
   </div>
 </main>
-
