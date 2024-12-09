@@ -11,7 +11,10 @@
       mat-icon-button
       cursor="pointer"
   /></span>
-  <span>{{ username
+
+
+  <span class="toolbar-spacer"></span>
+  <span class="welcome-message">{{ username
     ? 'Welcome back, ' + username + '!'
     : 'Login to get back to your favorites!'
   }}</span>
@@ -25,8 +28,6 @@
   >
     <mat-icon *ngIf="username">logout</mat-icon>
   </button>
-
-  <span class="toolbar-spacer"></span>
   <span>
     <button
       mat-icon-button
