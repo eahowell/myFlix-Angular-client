@@ -75,6 +75,5 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   }
   onLogout(): void {
     this.storageService.clearLocalStorage();
-    // this.router.navigate(['welcome']);
   }
 }
