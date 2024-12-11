@@ -1,0 +1,49 @@
+.movie-details {
+  max-width: 800px;
+  margin: 20px auto;
+  width: 50%;
+}
+
+.movie-image {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.description {
+  margin: 16px 0;
+  line-height: 1.6;
+}
+
+.details {
+  margin-top: 16px;
+  margin-left: 30px;
+}
+
+.detail-item {
+  margin-bottom: 16px;
+}
+
+.my-4 {
+  margin: 16px 0;
+}
+
+mat-card {
+  width: 50%;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  margin: 1%;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: #212529;
+  box-shadow: 0 0 10px #000;
+  color: #fff;
+}
+button {
+  color: #000000;
+  background-color: #F5CECE;
+  min-width: 75px;
+  padding: 2px;
+  margin: 20px;
+}

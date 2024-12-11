@@ -40,8 +40,9 @@ export class FetchApiDataService {
       errorMessage = `Server Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     console.error(errorMessage);
+    return throwError(() => error);
     // return throwError(() => new Error(errorMessage));
-    throw new Error(errorMessage);
+    // throw new Error(errorMessage);
   }
 
   // CREATE - POST - Allow new users to register;  (username, password, first name, last name, email, date of birth)

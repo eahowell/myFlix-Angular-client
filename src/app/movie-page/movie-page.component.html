@@ -1,0 +1,40 @@
+<div class="container mx-auto p-4">
+  <button mat-raised-button color="tertiary" (click)="returnToMovies()" matTooltip="Return to Movie List">Back to Movies</button>
+  <div class="max-w-3xl mx-auto">
+    <app-movie-card *ngIf="movie" [movie]="movie"></app-movie-card>
+
+    <mat-divider  class="my-4"></mat-divider>
+  <mat-card class="movie-details">
+    <mat-card-content>
+      <div class="details">
+        <div class="detail-item">
+          <h2>Synopsis</h2>
+          <p class="description">{{ movie.Description }}</p>
+
+          <mat-divider class="my-4"></mat-divider>
+        </div>
+
+        <div class="detail-item">
+          <h2>Genre</h2>
+
+            <h3>{{ movie.Genre?.Name }}</h3
+            > <p>{{ movie.Genre?.Description }}</p>
+
+        </div>
+        <mat-divider class="my-4"></mat-divider>
+        <div class="detail-item">
+          <h2>Director</h2>
+          <p><strong>Name: </strong> {{ movie.Director?.Name }}</p>
+          <p><strong>Bio:</strong> {{ movie.Director?.Bio }}</p>
+          <p *ngIf="movie.Director?.Birthday">
+            <strong>Born:</strong> {{ movie.Director?.Birthday | date }}
+          </p>
+          <p *ngIf="movie.Director?.Death_day">
+            <strong>Died:</strong> {{ movie.Director?.Death_day | date }}
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>

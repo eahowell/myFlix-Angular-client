@@ -42,10 +42,12 @@ import { AllMoviesPageComponent } from './all-movies-page/all-movies-page.compon
 import { GenreDialogComponent } from './genre-dialog/genre-dialog.component';
 import { DirectorDialogComponent } from './director-dialog/director-dialog.component';
 import { SynopsisDialogComponent } from './synopsis-dialog/synopsis-dialog.component';
+import { MoviePageComponent } from './movie-page/movie-page.component';
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: AllMoviesPageComponent },
   { path: 'profile', component: ProfilePageComponent },
+  { path: 'movie/:id', component: MoviePageComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
