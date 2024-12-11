@@ -39,8 +39,8 @@ export class UserRegistrationFormComponent implements OnInit {
       next: (response) => {
         this.dialogRef.close();
         console.log(response);
-        this.snackBar.open('User successfully registered!', 'OK', {
-          duration: 6000,
+        this.snackBar.open('User successfully registered! Login with your new account.', 'OK', {
+          duration: 10000,
         });
       },
       error: (error: HttpErrorResponse) => {
@@ -74,7 +74,7 @@ export class UserRegistrationFormComponent implements OnInit {
         console.log('Final error message:', errorMessage);
 
         this.snackBar.open(errorMessage, 'OK', {
-          duration: 5000,
+          duration: 25000,
           panelClass: ['error-snackbar'],
         });
       },
