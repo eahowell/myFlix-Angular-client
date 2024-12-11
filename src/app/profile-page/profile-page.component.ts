@@ -4,6 +4,8 @@ import { UserStateService } from '../user-state.service';
 import { Subscription } from 'rxjs';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StorageService } from '../local-storage.service';
+import { Router } from '@angular/router';
 
 interface UserUpdateData {
   Username: string;
@@ -33,7 +35,9 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   constructor(
     private userState: UserStateService,
     private fetchApiData: FetchApiDataService,
-    private snackBar: MatSnackBar
+    private storageService: StorageService,
+    private snackBar: MatSnackBar,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -104,6 +108,23 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     });
 }
 
+deleteUser(): void {
+  this.fetchApiData.deleteUser(this.user.Username).subscribe({
+    next: (response) => {
+      this.storageService.clearLocalStorage();
+      this.router.navigate(['welcome']);
+      this.snackBar.open('User deleted', 'OK', {
+        duration: 2000,
+      });
+    },
+    error: (error) => {
+      console.error('Delete error:', error);
+      this.snackBar.open(error.error || 'Failed to delete user', 'OK', {
+        duration: 2000,
+      });
+    },
+  });
+}
   saveChanges() {
     this.updateProfile(this.user);
     this.editMode = false;

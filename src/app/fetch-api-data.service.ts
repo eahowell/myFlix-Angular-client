@@ -150,8 +150,15 @@ export class FetchApiDataService {
     return this.http
       .delete(`${this.apiUrl}/users/${username}`, {
         headers: this.getHeaders(),
+        responseType: 'text', // Specify the response type as text
       })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map((response: string) => {
+          console.log(response); // Log the server response for debugging
+          return { message: response }; // Wrap the response in an object for consistency
+        }),
+        catchError(this.handleError) // Use the existing error handler
+      );
   }
 
   // UPDATE - PUT - Allow users to add a movie to their list of favorites

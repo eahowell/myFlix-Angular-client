@@ -109,27 +109,40 @@
     <mat-card-actions align="end">
       <button
         mat-raised-button
+        (click)="deleteUser()"
+        color="warn"
+        [hidden]="!editMode"
+        class="delete-button"
+        matTooltip="Delete your account"
+      >
+        Delete Account <mat-icon>delete</mat-icon>
+      </button>
+      <button
+        mat-raised-button
         (click)="toggleEditMode()"
         color="primary"
         [hidden]="editMode"
+        matTooltip="Edit your profile information"
       >
-        Edit
+        Edit <mat-icon>edit</mat-icon>
       </button>
       <button
         mat-raised-button
         (click)="saveChanges()"
         color="primary"
         [hidden]="!editMode"
+        matTooltip="Save your changes"
       >
-        Save
+        Save <mat-icon>save</mat-icon>
       </button>
       <button
         mat-raised-button
         (click)="cancelEdit()"
         color="primary"
         [hidden]="!editMode"
+        matTooltip="Cancel editing"
       >
-        Cancel
+        Cancel <mat-icon>cancel</mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>
