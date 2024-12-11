@@ -2,7 +2,7 @@
 <mat-card>
   <mat-dialog-content>
     <mat-card-header>
-      <mat-card-title>{{ movie.Title }}</mat-card-title>
+      <mat-card-title (click)="openMovieDetails()" cursor matTooltip="Go to Movie">{{ movie.Title }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <img

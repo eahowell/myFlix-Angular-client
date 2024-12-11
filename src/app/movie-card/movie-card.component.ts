@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
 import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';
 import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -32,6 +33,7 @@ export class MovieCardComponent implements OnInit, OnDestroy {
     public fetchApiData: FetchApiDataService,
     private userState: UserStateService,
     public dialog: MatDialog,
+    private router: Router,
   ) {}
 
 
@@ -113,5 +115,9 @@ export class MovieCardComponent implements OnInit, OnDestroy {
       data: { movie: movie }
     });
   }
-
+  openMovieDetails(): void {
+    this.router.navigate(['/movie', this.movie._id], {
+      state: { movie: this.movie }
+    });
+  }
 }
