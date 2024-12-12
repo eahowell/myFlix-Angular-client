@@ -64,7 +64,7 @@ Users can access information about movies, directors, and genres.
 - Login/Sign-Up buttons
 
 #### Movie List (Authenticated)
-- Search functionality
+- Search functionality (Optional Feature)
 - Genre/Director filters
 - Movie Cards display
 
