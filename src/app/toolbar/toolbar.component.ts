@@ -1,3 +1,7 @@
+/**
+ * - Main toolbar component that handles the application's top navigation bar.
+ * - Manages user authentication state and provides navigation controls.
+ */
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,11 +22,21 @@ import { Router } from '@angular/router';
   imports: [MatToolbarModule, MatButtonModule, MatIconModule, CommonModule, MatTooltipModule],
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
+  /** Current username of the logged-in user */
   username: string | null = null;
+  /** Flag indicating whether a valid authentication token exists */
   hasToken: boolean = false;
+  /** Object containing detailed user information */
   user: any = {};
-  private subscriptions: Subscription[] = [];
+  /** Array to store all component subscriptions for cleanup */
+  subscriptions: Subscription[] = [];
 
+  /**
+   * @param {FetchApiDataService} fetchApiData - Service for handling API requests
+   * @param {StorageService} storageService - Service for managing local storage operations
+   * @param {UserStateService} userState - Service for managing user state
+   * @param {Router} router - Angular router service for navigation
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     private storageService: StorageService,
@@ -30,6 +44,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     public router: Router
   ) {}
 
+  /** Sets up subscriptions to monitor user data, username, and token changes. */
   ngOnInit(): void {
     // Subscribe to user data
     this.subscriptions.push(
@@ -53,10 +68,12 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     );
   }
 
+  /** Cleans up component subscriptions on destruction. */
   ngOnDestroy() {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
+  /** Handles user logout by clearing local storage and redirecting to welcome page. */
   onLogout(): void {
     this.storageService.clearLocalStorage();
     this.router.navigate(['welcome']);

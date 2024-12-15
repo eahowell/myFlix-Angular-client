@@ -1,3 +1,9 @@
+/**
+ * - Standalone component for displaying detailed movie information.
+ * - Provides a dedicated page view for individual movies with navigation controls.
+ * - Requires movie data to be passed through router state navigation.
+ */
+
 import { MatDividerModule } from '@angular/material/divider';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -26,18 +32,18 @@ import { MatCardModule } from '@angular/material/card';
 export class MoviePageComponent {
   /**
    * - Holds the movie data received from router navigation state.
-   * - Type 'any' is used to accommodate varying movie data structures.
-   * @property {any} movie - The movie object containing details to display
+   * - Contains all details needed to display the movie information.
    */
   movie: any;
 
 
-  /**
-   * Creates an instance of MoviePageComponent.
-   * - Retrieves movie data from router navigation state.
-   * - Redirects to movies list if no movie data is found.
+   /**
+   * - Creates an instance of MoviePageComponent.
+   * - Initializes the component by retrieving movie data from navigation state.
+   * - If no movie data is found in the navigation state, redirects to the movies list.
    *
    * @param {Router} router - Angular router service for navigation
+   * @throws {Navigation} Redirects to '/movies' if movie data is not found
    */
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
@@ -47,10 +53,7 @@ export class MoviePageComponent {
       this.router.navigate(['/movies']);
     }
   }
-  /**
-   * Navigates back to the movies list page.
-   * Used for the return/back functionality in the UI.
-   */
+  /** Navigates back to the movies list page. Used for the return/back functionality in the UI.*/
   returnToMovies(): void {
     this.router.navigate(['/movies']);
   }

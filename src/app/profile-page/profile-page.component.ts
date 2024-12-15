@@ -1,4 +1,9 @@
 // profile-page.component.ts
+
+/**
+ * - Component for managing user profile information.
+ * - Provides functionality for viewing and editing user details, managing favorite movies, watch list, and account deletion.
+*/
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserStateService } from '../user-state.service';
 import { Subscription } from 'rxjs';
@@ -7,13 +12,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { StorageService } from '../local-storage.service';
 import { Router } from '@angular/router';
 
+/**
+ * - Interface defining the structure of user update data.
+ * - Used when sending profile updates to the API.
+ */
 interface UserUpdateData {
   Username: string;
   Email: string;
   Birthday: Date | string;
   FirstName: string;
   LastName: string;
-  Password?: string;
+  Password?: string; // Optional as it's only included when being updated
 }
 
 @Component({
@@ -22,16 +31,33 @@ interface UserUpdateData {
   styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
+  /** Current user data */
   user: any = null;
+  /** Backup of original user data for canceling edits */
   originalData: any = null;
+  /** Data prepared for update operation */
   dataToUpdate: any = null;
+  /** User's favorite movies list */
   favoriteMovies: any[] = [];
+  /** User's "to watch" movies list */
   toWatchMovies: any[] = [];
+  /** Flag for edit mode state */
   editMode: boolean = false;
+  /** New password input field */
   newPassword: string = '';
-  private subscriptions: Subscription[] = [];
+  /** Array to manage component subscriptions */
+  subscriptions: Subscription[] = [];
+  /** Cache of all movies data */
   private allMovies: any[] = [];
 
+  /**
+   * Creates an instance of ProfilePageComponent.
+   * @param {UserStateService} userState - Service for managing user state
+   * @param {FetchApiDataService} fetchApiData - Service for API calls
+   * @param {StorageService} storageService - Service for local storage operations
+   * @param {MatSnackBar} snackBar - Service for displaying notifications
+   * @param {Router} router - Angular router service
+   */
   constructor(
     private userState: UserStateService,
     private fetchApiData: FetchApiDataService,
@@ -40,6 +66,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     public router: Router
   ) {}
 
+   /** Initializes component by subscribing to user data and loading movies. */
   ngOnInit(): void {
     this.subscriptions.push(
       this.userState.getUserData().subscribe((userData) => {
@@ -54,10 +81,16 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     );
   }
 
+  /** Cleans up component subscriptions on destruction. */
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
+  /**
+   * - Loads and filters movies for user's favorites and watch list.
+   * - Updates local movie arrays with filtered results.
+   * @throws {Error} - Error message if API call fails
+   */
   loadUserMovies(): void {
     this.fetchApiData.getAllMovies().subscribe({
       next: (movies) => {
@@ -77,6 +110,12 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       },
     });
   }
+
+   /**
+   * - Updates user profile information.
+   * - Optionally includes password if a new one is provided.
+   * @param {any} updatedData - New user data to be saved
+   */
   updateProfile(updatedData: any): void {
     const dataToUpdate: UserUpdateData = {
       Username: this.user.Username,
@@ -108,6 +147,11 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     });
 }
 
+
+/**
+   * - Deletes user account and redirects to welcome page.
+   * - Clears local storage upon successful deletion.
+   */
 deleteUser(): void {
   this.fetchApiData.deleteUser(this.user.Username).subscribe({
     next: (response) => {
@@ -125,16 +169,23 @@ deleteUser(): void {
     },
   });
 }
+
+  /**
+   * - Toggles edit mode for user profile.
+   * - Saves original data for canceling edits.
+   */
   saveChanges() {
     this.updateProfile(this.user);
     this.editMode = false;
   }
 
+  /** Toggles edit mode and creates backup of current data. */
   toggleEditMode() {
     this.editMode = !this.editMode;
     if (this.editMode) this.originalData = { ...this.user };
   }
 
+  /** Cancels edit mode and restores original data. */
   cancelEdit() {
     this.user = { ...this.originalData };
     this.editMode = false;
