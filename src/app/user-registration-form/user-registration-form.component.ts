@@ -1,4 +1,9 @@
 // src/app/user-registration-form/user-registration-form.component.ts
+/**
+ * - Component for handling new user registration.
+ * - Provides a form interface for collecting user information and manages the registration process.
+ * - Includes comprehensive error handling for various registration scenarios.
+ */
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -12,8 +17,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class UserRegistrationFormComponent implements OnInit {
   /**
-   * Input data model for the registration form.
-   * All fields are required for successful registration.
+   * - Input data model for the registration form.
+   * - All fields are required for successful registration.
    */
   @Input() userData = {
     Username: '',
@@ -24,6 +29,12 @@ export class UserRegistrationFormComponent implements OnInit {
     LastName: '',
   };
 
+  /**
+   * Creates an instance of UserRegistrationFormComponent.
+   * @param {FetchApiDataService} fetchApiData - Service for making API calls
+   * @param {MatDialogRef<UserRegistrationFormComponent>} dialogRef - Reference to the dialog containing this component
+   * @param {MatSnackBar} snackBar - Service for displaying notification messages
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -42,12 +53,10 @@ export class UserRegistrationFormComponent implements OnInit {
    * - Shows a success message prompting user to login
    *
    * Handles various error scenarios with specific messages:
-   * - 400: Missing required fields
-   * - 409: Username already taken
-   * - 422: Invalid input format
-   * - 500: Server error
-   *
-   * @throws HttpErrorResponse when the API call fails
+   * @throws 400: Missing required fields
+   * @throws 409: Username already taken
+   * @throws 422: Invalid input format
+   * @throws 500: Server error
    */
   registerUser(): void {
     // Create a copy of userData with lowercase username
