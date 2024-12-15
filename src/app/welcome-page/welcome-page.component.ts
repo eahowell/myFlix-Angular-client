@@ -1,3 +1,7 @@
+/**
+ * - Welcome page component that serves as the landing page of the application.
+ * - Handles user registration and login functionality through dialog interactions.
+ */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
@@ -25,16 +29,27 @@ import { Router } from '@angular/router';
   ],
 })
 export class WelcomePageComponent implements OnInit, OnDestroy {
+  /** Current username of the logged-in user */
   username: string | null = null;
-  dialogRef: MatDialogRef<any> | null = null;
-  private subscriptions: Subscription[] = [];
+  /** Reference to the currently open dialog */
+  dialogRef: MatDialogRef<
+    UserRegistrationFormComponent | LoginFormComponent
+  > | null = null;
+  /** Array to store all component subscriptions for cleanup */
+  subscriptions: Subscription[] = [];
 
+  /**
+   * @param {StorageService} storageService - Service for managing local storage operations
+   * @param {MatDialog} dialog - Material Dialog service for opening modal dialogs
+   * @param {Router} router - Angular router service for navigation
+   */
   constructor(
     private storageService: StorageService,
     public dialog: MatDialog,
     public router: Router
   ) {}
 
+  /** Sets up subscription to monitor username changes. */
   ngOnInit(): void {
     // Subscribe to username changes
     this.subscriptions.push(
@@ -43,6 +58,11 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
       })
     );
   }
+
+  /**
+   * - Opens the user registration dialog with specified configuration.
+   * - Manages dialog reference and cleanup after dialog is closed.
+   */
   openUserRegistrationDialog(): void {
     this.dialogRef = this.dialog.open(UserRegistrationFormComponent, {
       maxWidth: '450px',
@@ -57,6 +77,11 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
       this.dialogRef = null;
     });
   }
+
+  /**
+   * - Opens the login dialog with specified configuration.
+   * - Manages dialog reference and cleanup after dialog is closed.
+   */
   openLoginDialog(): void {
     this.dialogRef = this.dialog.open(LoginFormComponent, {
       maxWidth: '450px',
@@ -70,9 +95,13 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
       this.dialogRef = null;
     });
   }
+
+  /** Cleans up component subscriptions on destruction. */
   ngOnDestroy() {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
+
+  /** Logs out the user and clears local storage. */
   onLogout(): void {
     this.storageService.clearLocalStorage();
   }
