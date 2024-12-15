@@ -1,4 +1,8 @@
 // movie-card.component.ts
+/**
+ * Component for displaying individual movie cards with interactive features.
+ * Handles movie information display, user interactions like favorites and watch list, and opens various dialogs for detailed information.
+ */
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { UserStateService } from '../user-state.service';
 import { Subscription } from 'rxjs';
@@ -16,7 +20,7 @@ import { Router } from '@angular/router';
 })
 
 export class MovieCardComponent implements OnInit, OnDestroy {
-
+/** Input property containing detailed movie information. */
   @Input() movie={
     _id: '',
     Title: '',
@@ -26,9 +30,19 @@ export class MovieCardComponent implements OnInit, OnDestroy {
     Director: {Name: '', Bio: '', Birthday: '', Death_day: '', TopMovies:{Title: ''}},
   };
 
+  /** Current user data from UserStateService */
   user: any = null;
-  private subscriptions: Subscription[] = [];
 
+   /** Array to store and manage component subscriptions */
+  subscriptions: Subscription[] = [];
+
+  /**
+   * Creates an instance of MovieCardComponent.
+   * @param {FetchApiDataService} fetchApiData - Service for API calls
+   * @param {UserStateService} userState - Service for managing user state
+   * @param {MatDialog} dialog - Service for opening dialogs
+   * @param {Router} router - Angular router service
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     private userState: UserStateService,
@@ -37,7 +51,7 @@ export class MovieCardComponent implements OnInit, OnDestroy {
   ) {}
 
 
-
+/** Initializes component by subscribing to user data. */
   ngOnInit(): void {
     this.subscriptions.push(
       this.userState.getUserData().subscribe((userData) => {
@@ -45,13 +59,26 @@ export class MovieCardComponent implements OnInit, OnDestroy {
       })
     );
   }
+
+  /** Cleans up subscriptions when component is destroyed. */
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
+
+  /**
+   * Checks if a movie is in user's favorites.
+   * @param {string} movieId - Movie identifier
+   * @returns {boolean} True if movie is in favorites
+   */
   isFavorite(movieId: string): boolean {
     return this.user?.FavoriteMovies?.includes(movieId) || false;
   }
 
+  /**
+   * Toggles a movie's favorite status.
+   * Adds or removes movie from user's favorites list.
+   * @param {string} movieId - Movie identifier
+   */
   toggleFavorite(movieId: string): void {
     if (!this.user) return;
 
@@ -66,10 +93,22 @@ export class MovieCardComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+ /**
+   * Checks if a movie is in user's watch list.
+   * @param {string} movieId - Movie identifier
+   * @returns {boolean} True if movie is in watch list
+   */
   isToWatch(movieId: string): boolean {
     return this.user?.ToWatch?.includes(movieId) || false;
   }
 
+
+  /**
+   * Toggles a movie's watch list status.
+   * Adds or removes movie from user's watch list.
+   * @param {string} movieId - Movie identifier
+   */
   toggleToWatch(movieId: string): void {
     if (!this.user) return;
 
@@ -84,6 +123,11 @@ export class MovieCardComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  /**
+   * Opens a dialog showing genre information.
+   * @param {any} movie - Movie object containing genre details
+   */
   openGenreDialog(movie: any): void {
     const dialogRef = this.dialog.open(GenreDialogComponent, {
       maxWidth: '450px',
@@ -94,6 +138,11 @@ export class MovieCardComponent implements OnInit, OnDestroy {
       data: { movie: movie }
     });
   }
+
+  /**
+   * Opens a dialog showing director information.
+   * @param {any} movie - Movie object containing director details
+   */
   openDirectorDialog(movie: any): void {
     const dialogRef = this.dialog.open(DirectorDialogComponent, {
       maxWidth: '450px',
@@ -105,6 +154,11 @@ export class MovieCardComponent implements OnInit, OnDestroy {
     });
   }
 
+
+   /**
+   * Opens a dialog showing movie synopsis.
+   * @param {any} movie - Movie object containing synopsis details
+   */
   openSynopsisDialog(movie: any): void {
     const dialogRef = this.dialog.open(SynopsisDialogComponent, {
       maxWidth: '450px',
@@ -115,6 +169,11 @@ export class MovieCardComponent implements OnInit, OnDestroy {
       data: { movie: movie }
     });
   }
+
+  /**
+   * Navigates to detailed movie view.
+   * Passes movie data through router state.
+   */
   openMovieDetails(): void {
     this.router.navigate(['/movie', this.movie._id], {
       state: { movie: this.movie }
