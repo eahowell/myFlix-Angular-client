@@ -1,3 +1,9 @@
+/**
+ * - Service responsible for managing and synchronizing user state across the application.
+ * - Handles user data loading, caching, and updates using RxJS BehaviorSubject.
+ *
+ * @class UserStateService
+ */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FetchApiDataService } from './fetch-api-data.service';
@@ -7,8 +13,14 @@ import { StorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class UserStateService {
-  private userSubject = new BehaviorSubject<any>(null);
+  /** BehaviorSubject that holds and emits the current user data state */
+  userSubject = new BehaviorSubject<any>(null);
 
+  /**
+   * Initializes the service and sets up subscriptions to monitor user authentication state
+   * @param {FetchApiDataService} fetchApiData - Service for handling API requests
+   * @param {StorageService} storageService - Service for managing local storage operations
+   */
   constructor(
     private fetchApiData: FetchApiDataService,
     private storageService: StorageService
@@ -29,7 +41,11 @@ export class UserStateService {
     });
   }
 
-  private loadUserData(username: string): void {
+   /**
+   * Fetches user data from the API and updates the user subject
+   * @param {string} username - Username of the user to load data for
+   */
+  public loadUserData(username: string): void {
     this.fetchApiData.getUser(username).subscribe({
       next: (userData) => {
         this.userSubject.next(userData);
@@ -41,10 +57,15 @@ export class UserStateService {
     });
   }
 
+  /**
+   * Returns an observable of the current user data
+   * @returns {Observable<any>} Observable stream of user data
+   */
   public getUserData(): Observable<any> {
     return this.userSubject.asObservable();
   }
 
+   /** Forces a refresh of the user data from the API */
   public refreshUserData(): void {
     const username = this.storageService.getCurrentUsername();
     if (username) {
@@ -52,6 +73,10 @@ export class UserStateService {
     }
   }
 
+  /**
+   * Updates the current user data in the BehaviorSubject
+   * @param {any} updatedData - New user data to be set
+   */
   public updateUserData(updatedData: any): void {
     this.userSubject.next(updatedData);
   }
