@@ -1,3 +1,9 @@
+/**
+ * Service for handling all API interactions for the MyFlix application.
+ * Provides methods for user authentication, movie data retrieval, and user preferences management.
+ * Includes built-in error handling and authentication header management.
+ * @class FetchApiDataService
+ */
 import { Injectable } from '@angular/core';
 import {
   HttpClient,
@@ -12,6 +18,9 @@ import { StorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class FetchApiDataService {
+  /**
+   * Base URL for the MyFlix API
+   */
   private apiUrl = 'https://myflix-eahowell-7d843bf0554c.herokuapp.com';
   constructor(
     private http: HttpClient,

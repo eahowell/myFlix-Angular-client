@@ -11,6 +11,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './user-registration-form.component.scss',
 })
 export class UserRegistrationFormComponent implements OnInit {
+  /**
+   * Input data model for the registration form.
+   * All fields are required for successful registration.
+   */
   @Input() userData = {
     Username: '',
     Password: '',
@@ -28,6 +32,23 @@ export class UserRegistrationFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Handles the user registration process.
+   * Converts username to lowercase and sends registration request to the API.
+   *
+   * On successful registration:
+   * - Closes the registration dialog
+   * - Logs the response
+   * - Shows a success message prompting user to login
+   *
+   * Handles various error scenarios with specific messages:
+   * - 400: Missing required fields
+   * - 409: Username already taken
+   * - 422: Invalid input format
+   * - 500: Server error
+   *
+   * @throws HttpErrorResponse when the API call fails
+   */
   registerUser(): void {
     // Create a copy of userData with lowercase username
     const userDataToSend = {

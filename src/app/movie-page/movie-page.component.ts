@@ -11,26 +11,47 @@ import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-movie-details-page',
   standalone: true,
-  imports: [MovieCardModule, CommonModule, MatButtonModule,
+  imports: [
+    MovieCardModule,
+    CommonModule,
+    MatButtonModule,
     MatIconModule,
     MatTooltipModule,
     MatDialogModule,
-    MatCardModule, MatDividerModule],
-  templateUrl: './movie-page.component.html',})
+    MatCardModule,
+    MatDividerModule,
+  ],
+  templateUrl: './movie-page.component.html',
+})
+export class MoviePageComponent {
+  /**
+   * - Holds the movie data received from router navigation state.
+   * - Type 'any' is used to accommodate varying movie data structures.
+   * @property {any} movie - The movie object containing details to display
+   */
+  movie: any;
 
-  export class MoviePageComponent {
-    movie: any;
 
-    constructor(private router: Router) {
-      const navigation = this.router.getCurrentNavigation();
-      this.movie = navigation?.extras?.state?.['movie'];
+  /**
+   * Creates an instance of MoviePageComponent.
+   * - Retrieves movie data from router navigation state.
+   * - Redirects to movies list if no movie data is found.
+   *
+   * @param {Router} router - Angular router service for navigation
+   */
+  constructor(private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    this.movie = navigation?.extras?.state?.['movie'];
 
-      if (!this.movie) {
-        this.router.navigate(['/movies']);
-      }
-    }
-
-    returnToMovies(): void {
+    if (!this.movie) {
       this.router.navigate(['/movies']);
     }
   }
+  /**
+   * Navigates back to the movies list page.
+   * Used for the return/back functionality in the UI.
+   */
+  returnToMovies(): void {
+    this.router.navigate(['/movies']);
+  }
+}

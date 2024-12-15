@@ -1,4 +1,9 @@
 // src/app/login-form/login-form.component.ts
+/**
+ * Component for handling user login functionality.
+ * Provides a form interface for user authentication and manages the login process.
+ * @class LoginFormComponent
+ */
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -14,11 +19,25 @@ import { StorageService } from '../local-storage.service';
   styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent implements OnInit {
+  /**
+   * Input data model for the login form.
+   * @property {Object} loginData - Contains user credentials
+   * @property {string} loginData.Username - User's username
+   * @property {string} loginData.Password - User's password
+   */
   @Input() loginData = {
     Username: '',
     Password: '',
   };
 
+  /**
+   * @param {FetchApiDataService} fetchApiData - Service for making API calls
+   * @param {UserStateService} userState - Service for managing user state
+   * @param {MatDialogRef<LoginFormComponent>} dialogRef - Reference to the dialog containing this component
+   * @param {MatSnackBar} snackBar - Service for displaying notification messages
+   * @param {Router} router - Angular router for navigation
+   * @param {StorageService} storageService - Service for managing local storage
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     private userState: UserStateService,
@@ -30,6 +49,24 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+   /**
+   * Handles the user login process.
+   * Converts username to lowercase, sends login request to the API,
+   * and handles the response appropriately.
+   *
+   * On successful login:
+   * - Stores the authentication token
+   * - Stores the username
+   * - Closes the login dialog
+   * - Navigates to the movies page
+   * - Shows a success message
+   *
+   * On failed login:
+   * - Logs the error details
+   * - Shows an error message to the user
+   *
+   * @throws HttpErrorResponse When the API call fails
+   */
   loginUser(): void {
     const loginDataToSend = {
       ...this.loginData,
