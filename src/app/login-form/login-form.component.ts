@@ -2,12 +2,10 @@
 /**
  * Component for handling user login functionality.
  * Provides a form interface for user authentication and manages the login process.
- * @class LoginFormComponent
  */
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { UserStateService } from '../user-state.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -32,7 +30,6 @@ export class LoginFormComponent implements OnInit {
 
   /**
    * @param {FetchApiDataService} fetchApiData - Service for making API calls
-   * @param {UserStateService} userState - Service for managing user state
    * @param {MatDialogRef<LoginFormComponent>} dialogRef - Reference to the dialog containing this component
    * @param {MatSnackBar} snackBar - Service for displaying notification messages
    * @param {Router} router - Angular router for navigation
@@ -40,7 +37,6 @@ export class LoginFormComponent implements OnInit {
    */
   constructor(
     public fetchApiData: FetchApiDataService,
-    private userState: UserStateService,
     public dialogRef: MatDialogRef<LoginFormComponent>,
     public snackBar: MatSnackBar,
     private router: Router,
