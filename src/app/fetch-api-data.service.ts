@@ -1,7 +1,7 @@
 /**
- * Service for handling all API interactions for the MyFlix application.
- * Provides methods for user authentication, movie data retrieval, and user preferences management.
- * Includes built-in error handling and authentication header management.
+ * - Service for handling all API interactions for the MyFlix application.
+ * - Provides methods for user authentication, movie data retrieval, and user preferences management.
+ * - Includes built-in error handling and authentication header management.
  * @class FetchApiDataService
  */
 import { Injectable } from '@angular/core';
@@ -18,16 +18,22 @@ import { StorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class FetchApiDataService {
-  /**
-   * Base URL for the MyFlix API
-   */
+  /** Base URL for the MyFlix API */
   private apiUrl = 'https://myflix-eahowell-7d843bf0554c.herokuapp.com';
+
+  /**
+   * @param {HttpClient} http - Angular's HttpClient for making HTTP requests
+   * @param {StorageService} storageService - Service for managing local storage
+   */
   constructor(
     private http: HttpClient,
     private storageService: StorageService
   ) {}
 
-  // Private method to get headers
+  /**
+   * Creates HTTP headers with authentication token and content type.
+   * @returns {HttpHeaders} Headers with Bearer token and JSON content type
+   */
   private getHeaders(): HttpHeaders {
     const token = this.storageService.getCurrentToken();
     return new HttpHeaders({
@@ -36,9 +42,20 @@ export class FetchApiDataService {
     });
   }
 
+  /**
+   * Extracts data from HTTP response.
+   * @param {any} res - HTTP response
+   * @returns {any} Response data or empty object
+   */
   private extractResponseData(res: any): any {
     return res || {};
   }
+
+  /**
+   * Handles HTTP errors and transforms them into observable error messages.
+   * @param {HttpErrorResponse} error - HTTP error response
+   * @returns {Observable<never>} Observable that errors with formatted message
+   */
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An error occurred';
     if (error.error instanceof ErrorEvent) {
@@ -50,11 +67,13 @@ export class FetchApiDataService {
     }
     console.error(errorMessage);
     return throwError(() => error);
-    // return throwError(() => new Error(errorMessage));
-    // throw new Error(errorMessage);
   }
 
-  // CREATE - POST - Allow new users to register;  (username, password, first name, last name, email, date of birth)
+  /**
+   * CREATE - POST - Allow new users to register;  (username, password, first name, last name, email, date of birth)
+   * @param {any} userDetails - User registration details
+   * @returns {Observable<any>} Observable with registration response
+   */
   public userRegistration(userDetails: any): Observable<any> {
     return this.http
       .post(`${this.apiUrl}/users`, userDetails, {
@@ -64,7 +83,13 @@ export class FetchApiDataService {
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
-  // CREATE - POST - Allow users to login;  (using username and password)
+
+  /**
+   * CREATE - POST - Allow users to login;  (using username and password)
+   * @param {string} username - User's username
+   * @param {string} password - User's password
+   * @returns {Observable<any>} Observable with login response including auth token
+   */
   public userLogin(username: string, password: string): Observable<any> {
     return this.http
       .post(
@@ -82,7 +107,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // READ - GET - Return a list of ALL movies to the user
+  /**
+   * READ - GET - Return a list of ALL movies to the user
+   * @returns {Observable<any>} Observable with array of movies
+   */
   public getAllMovies(): Observable<any> {
     return this.http
       .get(`${this.apiUrl}/movies`, {
@@ -91,7 +119,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // READ - GET - Return data about a single movie by title to the user
+  /**
+   * READ - GET - Return data about a single movie by title to the user
+   * @param {string} title - Movie title
+   * @returns {Observable<any>} Observable with movie details
+   */
   public getMovie(title: string): Observable<any> {
     return this.http
       .get(`${this.apiUrl}/movies/${title}`, {
@@ -100,7 +132,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // READ - GET - Return a list of ALL genres to the user
+  /**
+   * READ - GET - Return a list of ALL genres to the user
+   * @returns {Observable<any>} Observable with array of all genres
+   */
   public getAllGenres(): Observable<any> {
     return this.http
       .get(`${this.apiUrl}/genres`, {
@@ -109,7 +144,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // READ - GET - Return data about a genre (description) by name (e.g., “Thriller”)
+  /**
+   * READ - GET - Return data about a genre (description) by name (e.g., “Thriller”)
+   * @param {string} genreName - Name of the genre to retrieve
+   * @returns {Observable<any>} Observable with genre details including description
+   */
   public getGenre(genreName: string): Observable<any> {
     return this.http
       .get(`${this.apiUrl}/genres/${genreName}`, {
@@ -118,7 +157,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // READ - GET - Return a list of ALL directors to the user
+  /**
+   * READ - GET - Return a list of ALL directors to the user
+   * @returns {Observable<any>} Observable with array of all directors
+   */
   public getAllDirectors(): Observable<any> {
     return this.http
       .get(`${this.apiUrl}/directors`, {
@@ -127,7 +169,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // READ - GET - Return data about a director (bio, birth year, death year) by name
+  /**
+   * READ - GET - Return data about a director (bio, birth year, death year) by name
+   * @param {string} directorName - Name of the director to retrieve
+   * @returns {Observable<any>} Observable with director details including bio and birth/death years
+   */
   public getDirector(directorName: string): Observable<any> {
     return this.http
       .get(`${this.apiUrl}/directors/${directorName}`, {
@@ -135,7 +181,12 @@ export class FetchApiDataService {
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
-  // READ - GET - Return the details of a specific to the user
+
+  /**
+   * READ - GET - Return the details of a specific to the user
+   * @param {string} username - Username of the user to retrieve
+   * @returns {Observable<any>} Observable with user profile details
+   */
   public getUser(username: string): Observable<any> {
     return this.http
       .get(`${this.apiUrl}/users/${username}`, {
@@ -144,8 +195,12 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // UPDATE - PUT - Allow users to update their user info (email, first name, last name, and password)
-  // Only those fields can be updated because we don't want username, userID, and DOB to be changed
+  /**
+   * UPDATE - PUT - Allow users to update their user info (email, first name, last name, and password)
+   * - Only those fields can be updated because we don't want username, userID, and DOB to be changed
+   * @param {any} userDetails - Updated user details
+   * @returns {Observable<any>} Observable with updated user information
+   */
   public updateUser(userDetails: any): Observable<any> {
     console.log({ ...userDetails });
     return this.http
@@ -155,7 +210,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // DELETE - Allow existing users to deregister (Delete account)
+  /**
+   * DELETE - Allow existing users to deregister (Delete account)
+   * @param {string} username - Username of account to delete
+   * @returns {Observable<any>} Observable with deletion confirmation
+   */
   public deleteUser(username: string): Observable<any> {
     return this.http
       .delete(`${this.apiUrl}/users/${username}`, {
@@ -171,7 +230,12 @@ export class FetchApiDataService {
       );
   }
 
-  // UPDATE - PUT - Allow users to add a movie to their list of favorites
+  /**
+   * UPDATE - PUT - Allow users to add a movie to their list of favorites
+   * @param {string} username - User's username
+   * @param {string} MovieID - ID of movie to add
+   * @returns {Observable<any>} Observable with updated favorites list
+   */
   public addFavorite(username: string, MovieID: string): Observable<any> {
     return this.http
       .put(
@@ -184,7 +248,12 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // DELETE - Allow users to remove a movie from their list of favorites
+  /**
+   * DELETE - Allow users to remove a movie to their list of favorites
+   * @param {string} username - User's username
+   * @param {string} MovieID - ID of movie to add
+   * @returns {Observable<any>} Observable with updated favorites list
+   */
   public deleteFavorite(username: string, MovieID: string): Observable<any> {
     return this.http
       .delete(`${this.apiUrl}/users/${username}/favorites/${MovieID}`, {
@@ -193,7 +262,12 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // UPDATE - PUT - Allow users to add movie to the "To Watch" list
+  /**
+   * UPDATE - PUT - Allow users to add movie to the "To Watch" list
+   * @param {string} username - User's username
+   * @param {string} MovieID - ID of movie to add
+   * @returns {Observable<any>} Observable with updated to watch list
+   */
   public addToWatch(username: string, MovieID: string): Observable<any> {
     return this.http
       .put(
@@ -206,7 +280,12 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // DELETE - Allow users to remove a movie from their list of To Watch
+  /**
+   * DELETE - Allow users to remove a movie from their list of To Watch
+   * @param {string} username - User's username
+   * @param {string} MovieID - ID of movie to add
+   * @returns {Observable<any>} Observable with updated to watch list
+   */
   public deleteToWatch(username: string, MovieID: string): Observable<any> {
     return this.http
       .delete(`${this.apiUrl}/users/${username}/toWatch/${MovieID}`, {
