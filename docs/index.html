@@ -1,0 +1,135 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="."><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>my-flix-angular-client</title><meta name="description" content="Documentation for my-flix-angular-client"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search"><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">my-flix-angular-client</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>my-flix-angular-client</h1></div><div class="tsd-panel tsd-typography"><p><img src="media/myFlixLogo-Light.png" alt="myFlix Logo"></p>
+<a id="welcome-to-the-myflix-client-angular" class="tsd-anchor"></a><h1 class="tsd-anchor-link">Welcome to the myFlix Client (Angular)<a href="#welcome-to-the-myflix-client-angular" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p><img src="https://img.shields.io/github/issues/eahowell/myFlix-Angular-client?color=yellow" alt="GitHub issues">
+<img src="https://img.shields.io/github/stars/eahowell/myFlix-Angular-client" alt="GitHub Repo stars">
+<img src="https://img.shields.io/github/forks/eahowell/myFlix-Angular-client" alt="GitHub forks">
+<img src="https://img.shields.io/github/watchers/eahowell/myFlix-Angular-client" alt="GitHub watchers"></p>
+<p>The client side of the myFlix app using Angular that's using the server-side <a href="https://github.com/eahowell/movie_api" target="_blank" class="external">movie_api</a> (REST API and Database)</p>
+<p>This project was generated with <a href="https://github.com/angular/angular-cli" target="_blank" class="external">Angular CLI</a> version 18.2.9.</p>
+<a id="key-features" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Key Features<a href="#key-features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>Your app should display a welcome view where users will be able to either log in or register an
+account.</li>
+<li>Once authenticated, the user should now view all movies.</li>
+<li>Upon clicking on a particular movie, users will be taken to a single movie view, where
+additional movie details will be displayed. The single movie view will contain the following
+additional features:
+<ul>
+<li>A button that when clicked takes a user to the director view, where details about the
+director of that particular movie will be displayed.</li>
+<li>A button that when clicked takes a user to the genre view, where details about that
+particular genre of the movie will be displayed.</li>
+</ul>
+</li>
+</ul>
+<a id="technical-requirements" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Technical Requirements<a href="#technical-requirements" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>The project technical requirements include:</p>
+<ul>
+<li>The application must be written in Angular (version 9 or later)</li>
+<li>The application requires the latest version of Node.js and npm package</li>
+<li>The application must contain user registration and login forms</li>
+<li>The application must be designed using Angular Material</li>
+<li>The application's codebase must contain comments using Typedoc</li>
+<li>The project must contain technical documentation using JSDoc</li>
+<li>The project must be hosted on GitHub Pages</li>
+</ul>
+<a id="user-stories" class="tsd-anchor"></a><h1 class="tsd-anchor-link">User Stories<a href="#user-stories" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><table>
+<tr>
+<td width="50%" valign="top">
+<a id="1-movie-information-access" class="tsd-anchor"></a><h2 class="tsd-anchor-link">1. Movie Information Access<a href="#1-movie-information-access" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Users can access information about movies, directors, and genres.</p>
+<a id="navigation-features" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Navigation Features<a href="#navigation-features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><a id="logged-in-users" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Logged-in Users<a href="#logged-in-users" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><ul>
+<li>Movies Button → Movie List</li>
+<li>User Profile Button → User Profile</li>
+<li>Logout Button with redirect to Login</li>
+<li>Logged-in user indicator</li>
+<li>Brand Logo → Homepage</li>
+</ul>
+<a id="non-logged-users" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Non-logged Users<a href="#non-logged-users" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><ul>
+<li>Brand Logo → Homepage</li>
+<li>Login Button → Login View</li>
+<li>Sign-Up Button → Sign-Up View</li>
+</ul>
+<a id="core-views" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Core Views<a href="#core-views" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><a id="homepage" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Homepage<a href="#homepage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><ul>
+<li>App Title</li>
+<li>Navigation Toolbar</li>
+<li>Login/Sign-Up buttons</li>
+</ul>
+<a id="movie-list-authenticated" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Movie List (Authenticated)<a href="#movie-list-authenticated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><ul>
+<li>Search functionality (Optional Feature)</li>
+<li>Genre/Director filters</li>
+<li>Movie Cards display</li>
+</ul>
+<a id="movie-card-authenticated" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Movie Card (Authenticated)<a href="#movie-card-authenticated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><ul>
+<li>Movie poster</li>
+<li>Title and Director</li>
+<li>Details button → Movie View</li>
+<li>Add to Favorites button</li>
+</ul>
+<a id="movie-details-authenticated" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Movie Details (Authenticated)<a href="#movie-details-authenticated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><ul>
+<li>Movie poster</li>
+<li>Full details (Title, Director, Genre, Cast, Description)</li>
+<li>Navigation to Director/Genre views</li>
+</ul>
+<a id="directorgenre-details" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Director/Genre Details<a href="#directorgenre-details" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><ul>
+<li>Director: Bio, Birth/Death dates</li>
+<li>Genre: Name and Description</li>
+<li>Return navigation</li>
+</ul>
+</td>
+<td width="50%" valign="top">
+<a id="2-user-profile-management" class="tsd-anchor"></a><h2 class="tsd-anchor-link">2. User Profile Management<a href="#2-user-profile-management" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Users can create a profile to save data about their favorite movies</p>
+<a id="authentication-views" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Authentication Views<a href="#authentication-views" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><a id="login" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Login<a href="#login" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><ul>
+<li>Username/Password fields</li>
+<li>Sign in with API authentication</li>
+<li>Sign-Up redirect</li>
+<li>Password reset</li>
+<li>Form validation</li>
+</ul>
+<a id="sign-up" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Sign-Up<a href="#sign-up" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><ul>
+<li>Required fields:
+<ul>
+<li>Username</li>
+<li>Password + confirmation</li>
+<li>Email</li>
+<li>Birthday</li>
+<li>First/Last Name</li>
+</ul>
+</li>
+<li>Register with API integration</li>
+<li>Form validation</li>
+</ul>
+<a id="profile-features-authenticated" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Profile Features (Authenticated)<a href="#profile-features-authenticated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li>User Information management</li>
+<li>Form validation</li>
+<li>Favorite Movies List with Movie Cards</li>
+</ul>
+</td>
+</tr>
+</table>
+<a id="app-wireflow" class="tsd-anchor"></a><h2 class="tsd-anchor-link">App Wireflow<a href="#app-wireflow" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p><img src="media/wireflow.png" alt="myFlix Angular Wireflow"></p>
+<a id="development-server" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Development server<a href="#development-server" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The application will automatically reload if you change any of the source files.</p>
+<a id="code-scaffolding" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Code scaffolding<a href="#code-scaffolding" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Run <code>ng generate component component-name</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
+<a id="build" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Build<a href="#build" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
+<a id="running-unit-tests" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Running unit tests<a href="#running-unit-tests" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io" target="_blank" class="external">Karma</a>.</p>
+<a id="running-end-to-end-tests" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Running end-to-end tests<a href="#running-end-to-end-tests" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Run <code>ng e2e</code> to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.</p>
+<a id="further-help" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Further help<a href="#further-help" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://angular.dev/tools/cli" target="_blank" class="external">Angular CLI Overview and Command Reference</a> page.</p>
+<a id="api-endpoints" class="tsd-anchor"></a><h2 class="tsd-anchor-link">API Endpoints<a href="#api-endpoints" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>API is housed on Heroku</li>
+<li><a href="https://github.com/eahowell/movie_api/blob/main/README.md" target="_blank" class="external">Find the API and it's endpoint documentation here</a></li>
+</ul>
+<a id="database" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Database<a href="#database" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li>myFlixDB is stored in MongoDB</li>
+<li>Collections include:
+<ul>
+<li>Users</li>
+<li>Movies</li>
+<li>Genres</li>
+<li>Directors</li>
+<li>Actors</li>
+</ul>
+</li>
+</ul>
+<a id="license" class="tsd-anchor"></a><h2 class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>API uses ISC</li>
+<li>Angular uses MIT <a href="https://angular.dev/license" target="_blank" class="external">https://angular.dev/license</a></li>
+<li>RxJS uses Apache-2.0 <a href="http://www.apache.org/licenses/" target="_blank" class="external">http://www.apache.org/licenses/</a></li>
+<li>tslib uses 0BSD</li>
+</ul>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#welcome-to-the-myflix-client-angular"><span>Welcome to the my<wbr/>Flix <wbr/>Client (<wbr/>Angular)</span></a><ul><li><a href="#key-features"><span>Key <wbr/>Features</span></a></li><li><a href="#technical-requirements"><span>Technical <wbr/>Requirements</span></a></li></ul><a href="#user-stories"><span>User <wbr/>Stories</span></a><ul><li><a href="#1-movie-information-access"><span>1. <wbr/>Movie <wbr/>Information <wbr/>Access</span></a></li><li><ul><li><a href="#navigation-features"><span>Navigation <wbr/>Features</span></a></li><li><ul><li><a href="#logged-in-users"><span>Logged-<wbr/>in <wbr/>Users</span></a></li><li><a href="#non-logged-users"><span>Non-<wbr/>logged <wbr/>Users</span></a></li></ul></li><li><a href="#core-views"><span>Core <wbr/>Views</span></a></li><li><ul><li><a href="#homepage"><span>Homepage</span></a></li><li><a href="#movie-list-authenticated"><span>Movie <wbr/>List (<wbr/>Authenticated)</span></a></li><li><a href="#movie-card-authenticated"><span>Movie <wbr/>Card (<wbr/>Authenticated)</span></a></li><li><a href="#movie-details-authenticated"><span>Movie <wbr/>Details (<wbr/>Authenticated)</span></a></li><li><a href="#directorgenre-details"><span>Director/<wbr/>Genre <wbr/>Details</span></a></li></ul></li></ul></li><li><a href="#2-user-profile-management"><span>2. <wbr/>User <wbr/>Profile <wbr/>Management</span></a></li><li><ul><li><a href="#authentication-views"><span>Authentication <wbr/>Views</span></a></li><li><ul><li><a href="#login"><span>Login</span></a></li><li><a href="#sign-up"><span>Sign-<wbr/>Up</span></a></li></ul></li><li><a href="#profile-features-authenticated"><span>Profile <wbr/>Features (<wbr/>Authenticated)</span></a></li></ul></li><li><a href="#app-wireflow"><span>App <wbr/>Wireflow</span></a></li><li><a href="#development-server"><span>Development server</span></a></li><li><a href="#code-scaffolding"><span>Code scaffolding</span></a></li><li><a href="#build"><span>Build</span></a></li><li><a href="#running-unit-tests"><span>Running unit tests</span></a></li><li><a href="#running-end-to-end-tests"><span>Running end-<wbr/>to-<wbr/>end tests</span></a></li><li><a href="#further-help"><span>Further help</span></a></li><li><a href="#api-endpoints"><span>API <wbr/>Endpoints</span></a></li><li><ul><li><a href="#database"><span>Database</span></a></li></ul></li><li><a href="#license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">my-flix-angular-client</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
