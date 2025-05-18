@@ -1,4 +1,4 @@
-![myFlix Logo](public/myFlixLogo-Light.png)
+![myFlix Logo](public/myFlixLogo-brand.png)
 # Welcome to the myFlix Client (Angular)
 ![GitHub issues](https://img.shields.io/github/issues/eahowell/myFlix-Angular-client?color=yellow)
 ![GitHub Repo stars](https://img.shields.io/github/stars/eahowell/myFlix-Angular-client)
