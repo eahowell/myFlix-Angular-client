@@ -28,6 +28,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
       - [Running end-to-end tests](#running-end-to-end-tests)
       - [Further help](#further-help)
   - [🔗 API Endpoints](#-api-endpoints)
+  - [🪙 Authentication](#-authentication)
+  - [📂 Folder Structure](#-folder-structure)
   - [🗄️ Database](#️-database)
   - [🤝 Contributing](#-contributing)
   - [🪪 License](#-license)
@@ -288,6 +290,58 @@ The client communicates with the [myFlix API](https://github.com/eahowell/movie_
   - <summary><code>DELETE</code> <code><b>/users/:Username/toWatch/:MovieID</b></code> <code>Remove a movie from watch list</code></summary>
 
 _For a complete list of endpoints and documentation, visit the [API Repository](https://github.com/eahowell/movie_api)._
+
+[🔝](#welcome-to-the-myflix-client-angular)  
+## 🪙 Authentication
+
+JWTs are stored in `localStorage`.  
+Send as header:  
+`Authorization: Bearer <token>`   
+
+[🔝](#welcome-to-the-myflix-client-angular) 
+## 📂 Folder Structure
+```text
+myFlix-Angular-client/
+├── e2e/  
+│   ├── src/  
+│   └── protractor.conf.js  
+├── node_modules/  
+├── public/  
+│   ├── myFlixLogo-brand.png  
+│   └── wireflow.png  
+├── src/  
+│   ├── app/  
+│   │   ├── components/  
+│   │   │   ├── movie-card/  
+│   │   │   │   ├── movie-card.component.ts  
+│   │   │   │   ├── movie-card.component.html  
+│   │   │   │   └── movie-card.component.scss  
+│   │   │   ├── movie-view/  
+│   │   │   ├── director-view/  
+│   │   │   └── genre-view/  
+│   │   ├── services/  
+│   │   │   └── fetch-api-data.service.ts  
+│   │   ├── models/  
+│   │   │   └── movie.ts  
+│   │   ├── app-routing.module.ts  
+│   │   ├── app.component.ts  
+│   │   └── app.module.ts  
+│   ├── assets/  
+│   ├── environments/  
+│   │   ├── environment.ts  
+│   │   └── environment.prod.ts  
+│   ├── index.html  
+│   ├── main.ts  
+│   ├── polyfills.ts  
+│   ├── styles.scss  
+│   └── test.ts  
+├── .gitignore  
+├── angular.json  
+├── karma.conf.js  
+├── package.json  
+├── tsconfig.json  
+└── README.md
+```
 
 [🔝](#welcome-to-the-myflix-client-angular)
 ## 🗄️ Database
